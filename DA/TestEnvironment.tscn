@@ -29,9 +29,10 @@ ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_85of2"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jr8mn"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2payb"]
+size = Vector3(38.555, 0, 20.705)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj7jq"]
 albedo_color = Color(0, 0.313726, 0.129412, 1)
@@ -51,14 +52,12 @@ transform = Transform3D(1, 0, 0, 0, 0.928583, 0.371125, 0, -0.371125, 0.928583, 
 environment = SubResource("Environment_mfcpt")
 current = true
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_85of2")
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_lvrj5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_jr8mn")
+shape = SubResource("BoxShape3D_2payb")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D/CollisionShape3D"]
-size = Vector3(41.27, 0.325, 20.03)
+[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(41.27, -1.495, 20.03)
 material = SubResource("StandardMaterial3D_cj7jq")

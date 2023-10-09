@@ -4,7 +4,7 @@ var building_node = preload("res://DA/Building.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var building = building_node.instantiate()
-	get_node("RigidBody3D").add_child(building)
+	add_child(building)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,6 +1,6 @@
 extends Node3D
 
-var steps: int = 200
+var steps: int = 20
 var rotation_step_size: float = (2 * PI) / steps
 var cylinder_radius: float = 2
 var height: float = 20
@@ -12,7 +12,7 @@ var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for step in range(0, steps):
-		for y in range(1, height):
+		for y in range(0, height):
 			#the center of the cylinder
 			var center: Vector3 = Vector3(0, y * brick_height, 0)
 			var theta: float = rotation_step_size * step
@@ -30,8 +30,16 @@ func _ready():
 					cylinder_radius * sin(theta)
 				), 
 				center)
-			#add brick to scene
-			add_child(brick)
+			var collision_shape = CollisionShape3D.new()
+			collision_shape.shape = BoxShape3D.new()
+			collision_shape.shape.size = brick_size
+			var rigid_body = RigidBody3D.new()
+			rigid_body.freeze = true
+			rigid_body.add_child(collision_shape)
+			rigid_body.add_child(brick)
+			#add collision shape to brick
+			add_child(rigid_body)
+			
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
