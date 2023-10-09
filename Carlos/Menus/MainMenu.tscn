@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm1lb1dqmvve4"]
+
+[ext_resource type="Script" path="res://Carlos/Menus/menu_container.gd" id="1_6lk1r"]
+[ext_resource type="Script" path="res://Carlos/Menus/MainMenu.gd" id="1_482fo"]
+[ext_resource type="Texture2D" uid="uid://cq2yvxqoml24u" path="res://Art/Icons/arrow.png" id="3_dpa6d"]
+[ext_resource type="Script" path="res://Carlos/Menus/MainMenuHandler.gd" id="5_blwv5"]
+
+[sub_resource type="Gradient" id="Gradient_a1jec"]
+colors = PackedColorArray(0.0745516, 0.784689, 0.739849, 1, 0.043493, 0.359374, 0.445593, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yphj8"]
+gradient = SubResource("Gradient_a1jec")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0.205128, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f853s"]
+
+[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("menu", "game_title")]
+process_mode = 3
+script = ExtResource("1_482fo")
+menu = NodePath("VBoxContainer/Menu")
+has_title_transition = true
+game_title = NodePath("VBoxContainer/Title")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_yphj8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.5
+offset_top = -225.0
+offset_right = 185.5
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 186
+text = "TITLE"
+label_settings = SubResource("LabelSettings_f853s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("pointer")]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+script = ExtResource("1_6lk1r")
+pointer = NodePath("../../Pointer")
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Play Button
+"
+
+[node name="Settings" type="Button" parent="VBoxContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Settings
+"
+
+[node name="About" type="Button" parent="VBoxContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "About
+"
+
+[node name="Pointer" type="Sprite2D" parent="."]
+texture_filter = 2
+position = Vector2(383, 392)
+scale = Vector2(2.699, 2)
+texture = ExtResource("3_dpa6d")
+
+[node name="MenuButtonHandler" type="Node" parent="." node_paths=PackedStringArray("menu_handler")]
+script = ExtResource("5_blwv5")
+menu_handler = NodePath("..")
+level_to_load_path = "res://Carlos/PrototypeScene/MovementPrototype.tscn"

@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnqienosbapdp"]
+
+[ext_resource type="Script" path="res://Carlos/Menus/MainMenu.gd" id="1_5xbvr"]
+[ext_resource type="Script" path="res://Carlos/Menus/menu_container.gd" id="2_xotk8"]
+[ext_resource type="Texture2D" uid="uid://cq2yvxqoml24u" path="res://Art/Icons/arrow.png" id="3_5rk2a"]
+[ext_resource type="Script" path="res://Carlos/Menus/pause_button_handler.gd" id="4_82tkl"]
+
+[sub_resource type="Gradient" id="Gradient_j4kir"]
+offsets = PackedFloat32Array(0, 0.0701169, 0.988314)
+colors = PackedColorArray(0, 0, 0, 0.745098, 0.0313726, 0.0313726, 0.0313726, 0.745098, 0.235294, 0.235294, 0.235294, 0.705882)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d7xap"]
+gradient = SubResource("Gradient_j4kir")
+fill_to = Vector2(1, 1)
+
+[node name="pause_menu" type="CanvasLayer" node_paths=PackedStringArray("menu")]
+process_mode = 3
+script = ExtResource("1_5xbvr")
+menu = NodePath("Menu")
+transition = true
+init_pos = Vector2(-400, 31)
+final_pos = Vector2(60, 31)
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_d7xap")
+
+[node name="Menu" type="VBoxContainer" parent="." node_paths=PackedStringArray("pointer")]
+offset_left = -400.0
+offset_top = 31.0
+offset_right = -95.0
+offset_bottom = 429.0
+alignment = 1
+script = ExtResource("2_xotk8")
+pointer = NodePath("../Pointer")
+
+[node name="Resume" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+
+[node name="Audio" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Audio"
+
+[node name="Video" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Video"
+
+[node name="Credits" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+
+[node name="Exit To Menu" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Exit To Menu"
+
+[node name="Exit To Desktop" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Exit To Desktop"
+
+[node name="Pointer" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(9.5, 9.5)
+scale = Vector2(2, 2)
+texture = ExtResource("3_5rk2a")
+
+[node name="pause_button_handler" type="Node" parent="." node_paths=PackedStringArray("pause_menu_handler")]
+script = ExtResource("4_82tkl")
+pause_menu_handler = NodePath("..")

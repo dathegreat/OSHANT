@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Game Jam Template 4"
-run/main_scene="res://scenes/main/main.tscn"
+config/name="OSHANT"
+run/main_scene="res://Carlos/Menus/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 
@@ -20,9 +20,12 @@ config/icon="res://icon.png"
 Dialogue="*res://scenes/autoloads/dialogue.tscn"
 Options="*res://scenes/autoloads/options.tscn"
 SaveLoad="*res://scenes/autoloads/save_load.tscn"
+SceneTransition="*res://Carlos/Menus/SceneTransition.tscn"
+EventBus="*res://Carlos/components/event_bus.gd"
 
 [display]
 
+window/size/initial_position_type=3
 window/stretch/mode="canvas_items"
 
 [input]
