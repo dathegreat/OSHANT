@@ -37,7 +37,6 @@ func _ready():
 			rigid_body.freeze = true
 			rigid_body.add_child(collision_shape)
 			rigid_body.add_child(brick)
-			#add collision shape to brick
 			add_child(rigid_body)
 			
 
