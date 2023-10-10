@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://irba3p13okd3"]
+[gd_scene load_steps=14 format=3 uid="uid://irba3p13okd3"]
 
 [ext_resource type="Script" path="res://DA/TestEnvironment.gd" id="1_8rac5"]
+[ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="2_25sxt"]
+[ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://Carlos/PrototypeScene/player_character.tscn" id="3_sqd75"]
+[ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="4_47if1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwkbp"]
 
@@ -16,6 +19,14 @@ reflected_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2payb"]
+size = Vector3(53.1835, 0, 42.7359)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj7jq"]
+albedo_color = Color(0, 0.313726, 0.129412, 1)
+
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qkxud"]
 
 [sub_resource type="Sky" id="Sky_17w6c"]
@@ -29,14 +40,6 @@ ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2payb"]
-size = Vector3(38.555, 0, 20.705)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj7jq"]
-albedo_color = Color(0, 0.313726, 0.129412, 1)
-
 [node name="TestEnvironment" type="Node3D"]
 script = ExtResource("1_8rac5")
 
@@ -47,17 +50,31 @@ environment = SubResource("Environment_v2eui")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.800888, 0.598814, 0, -0.598814, 0.800888, 0, 6.87993, 8.68334)
-environment = SubResource("Environment_mfcpt")
-current = true
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_lvrj5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 0, -3.718)
 shape = SubResource("BoxShape3D_2payb")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D"]
-size = Vector3(41.27, 0, 20.03)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45129, -1, -2.51552)
+size = Vector3(51.644, 1, 40.2194)
 material = SubResource("StandardMaterial3D_cj7jq")
+
+[node name="RotationAnchor" type="Node3D" parent="."]
+script = ExtResource("2_25sxt")
+
+[node name="PlayerCharacter" parent="RotationAnchor" instance=ExtResource("3_sqd75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 11)
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+
+[node name="Camera3D" type="Camera3D" parent="RotationAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16)
+environment = SubResource("Environment_mfcpt")
+current = true
+
+[node name="Building" parent="." instance=ExtResource("4_47if1")]
+
+[connection signal="property_list_changed" from="Building" to="." method="_on_building_property_list_changed"]

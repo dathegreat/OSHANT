@@ -1,12 +1,12 @@
 extends Node3D
-
-var steps: int = 20
+@export_category("Building Parameters")
+@export var steps: int = 100
 var rotation_step_size: float = (2 * PI) / steps
-var cylinder_radius: float = 2
-var height: float = 20
-var brick_height: float = 0.5
+@export var cylinder_radius: float = 10
+@export var height: float = 20
+@export var brick_height: float = 0.5
 var brick_width: float = (2 * PI * cylinder_radius) / steps
-var brick_depth: float = 0.05
+@export var brick_depth: float = 1
 var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
 
 # Called when the node enters the scene tree for the first time.
@@ -43,7 +43,8 @@ func _ready():
 			add_child(rigid_body)
 	
 
-
+func redraw():
+	self._ready()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
