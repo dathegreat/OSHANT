@@ -8,6 +8,7 @@ var rotation_step_size: float = (2 * PI) / steps
 var brick_width: float = (2 * PI * cylinder_radius) / steps
 @export var brick_depth: float = 1
 var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
+var building_texture: Image = preload("res://DA/TestBuildingMap.png").get_image()
 var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
 
 # Called when the node enters the scene tree for the first time.
@@ -22,14 +23,17 @@ func _ready():
 			#the center of the cylinder
 			var center: Vector3 = Vector3(0, y * brick_height, 0)
 			var theta: float = rotation_step_size * step
-			var position: Vector3 = Vector3(
-				cylinder_radius * cos(theta), 
-				y * brick_height,  
-				cylinder_radius * sin(theta)
-			)
-			var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
-			var brick: RigidBody3D = create_brick(position, center, color)
-			add_child(brick)
+			#for every black pixel in the building map, draw a brick
+			if building_texture.get_pixel(building_texture.get_width() - step - 1, building_texture.get_height() - y - 1).v < 0.01:
+				var position: Vector3 = Vector3(
+					cylinder_radius * cos(theta), 
+					y * brick_height,  
+					cylinder_radius * sin(theta)
+				)
+				var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
+				var brick: RigidBody3D = create_brick(position, center, color)
+				add_child(brick)
+			#for every black pixel in the stair map, draw a brick
 			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
 				var stair_position: Vector3 = Vector3(
 					(cylinder_radius + brick_depth) * cos(theta), 
