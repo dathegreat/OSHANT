@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://irba3p13okd3"]
+[gd_scene load_steps=16 format=3 uid="uid://irba3p13okd3"]
 
 [ext_resource type="Script" path="res://DA/TestEnvironment.gd" id="1_8rac5"]
 [ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="2_25sxt"]
@@ -20,10 +20,13 @@ reflected_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8dvmy"]
+dof_blur_amount = 0.02
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2payb"]
-size = Vector3(53.1835, 0, 42.7359)
+size = Vector3(244.044, 0, 322.817)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj7jq"]
 albedo_color = Color(0, 0.313726, 0.129412, 1)
@@ -46,33 +49,34 @@ script = ExtResource("1_8rac5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v2eui")
+camera_attributes = SubResource("CameraAttributesPractical_8dvmy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 34.2085, 33.4116)
 shadow_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_lvrj5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75, 0, -3.718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1366, 0, -103.538)
 shape = SubResource("BoxShape3D_2payb")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45129, -1, -2.51552)
-size = Vector3(51.644, 1, 40.2194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1718, -1, -73.7149)
+size = Vector3(205.761, 1, 254.084)
 material = SubResource("StandardMaterial3D_cj7jq")
 
 [node name="RotationAnchor" type="Node3D" parent="."]
 script = ExtResource("2_25sxt")
 
 [node name="PlayerCharacter" parent="RotationAnchor" instance=ExtResource("3_sqd75")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 40)
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 
-[node name="Camera3D" type="Camera3D" parent="RotationAnchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16)
+[node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
 environment = SubResource("Environment_mfcpt")
 current = true
 script = ExtResource("4_aankn")

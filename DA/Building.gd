@@ -1,21 +1,24 @@
 extends Node3D
 @export_category("Building Parameters")
-@export var steps: int = 100
+@export var steps: int = 200
 var rotation_step_size: float = (2 * PI) / steps
-@export var cylinder_radius: float = 10
-@export var height: float = 20
+@export var cylinder_radius: float = 50
+@export var height: float = 50
 @export var brick_height: float = 0.5
 var brick_width: float = (2 * PI * cylinder_radius) / steps
 @export var brick_depth: float = 1
 var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
+var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for step in range(0, steps):
 		for y in range(0, height):
 			#determine if the given brick should be created or left empty
-			if randi_range(0, 100) < 5:
-				continue
+			#if randi_range(0, 100) < 5:
+				#continue
+			#if step % 5 == 0:
+				#continue
 			#the center of the cylinder
 			var center: Vector3 = Vector3(0, y * brick_height, 0)
 			var theta: float = rotation_step_size * step
@@ -27,25 +30,34 @@ func _ready():
 			var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
 			var brick: RigidBody3D = create_brick(position, center, color)
 			add_child(brick)
+			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
+				var stair_position: Vector3 = Vector3(
+					(cylinder_radius + brick_depth) * cos(theta), 
+					y * brick_height,  
+					(cylinder_radius + brick_depth) * sin(theta)
+				)
+				var stair_color: Color = Color(0.9, 0.9, 0.9)
+				var stair: RigidBody3D = create_brick(stair_position, center, stair_color)
+				add_child(stair)
 	#draw staircase on outside of building
-	for step in range(0, steps):
-		#staricase is generated in a spiral, with the height of each step
-		#in the spiral determined by simplex noise
-		var noise_generator: FastNoiseLite = FastNoiseLite.new()
-		noise_generator.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
-		var noise_sample: float = noise_generator.get_noise_1d(step)
-		var y: float = height * absf(noise_sample)
-		#the center of the cylinder
-		var center: Vector3 = Vector3(0, y * brick_height, 0)
-		var theta: float = rotation_step_size * step
-		var position: Vector3 = Vector3(
-			(cylinder_radius + brick_depth) * cos(theta), 
-			y * brick_height,  
-			(cylinder_radius + brick_depth) * sin(theta)
-		)
-		var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
-		var brick: RigidBody3D = create_brick(position, center, color)
-		add_child(brick)
+	#for step in range(0, steps):
+		##staricase is generated in a spiral, with the height of each step
+		##in the spiral determined by simplex noise
+		#var noise_generator: FastNoiseLite = FastNoiseLite.new()
+		#noise_generator.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+		#var noise_sample: float = noise_generator.get_noise_1d(step)
+		#var y: float = height * absf(noise_sample)
+		##the center of the cylinder
+		#var center: Vector3 = Vector3(0, y * brick_height, 0)
+		#var theta: float = rotation_step_size * step
+		#var position: Vector3 = Vector3(
+			#(cylinder_radius + brick_depth) * cos(theta), 
+			#y * brick_height,  
+			#(cylinder_radius + brick_depth) * sin(theta)
+		#)
+		#var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
+		#var brick: RigidBody3D = create_brick(position, center, color)
+		#add_child(brick)
 
 func create_brick(position: Vector3, center: Vector3, color: Color) -> RigidBody3D:
 	var brick: MeshInstance3D = MeshInstance3D.new()
