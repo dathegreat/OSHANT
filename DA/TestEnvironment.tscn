@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://irba3p13okd3"]
+[gd_scene load_steps=15 format=3 uid="uid://irba3p13okd3"]
 
 [ext_resource type="Script" path="res://DA/TestEnvironment.gd" id="1_8rac5"]
 [ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="2_25sxt"]
 [ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://Carlos/PrototypeScene/player_character.tscn" id="3_sqd75"]
 [ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="4_47if1"]
+[ext_resource type="Script" path="res://DA/Camera3D.gd" id="4_aankn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwkbp"]
 
@@ -74,6 +75,7 @@ axis_lock_linear_z = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16)
 environment = SubResource("Environment_mfcpt")
 current = true
+script = ExtResource("4_aankn")
 
 [node name="Building" parent="." instance=ExtResource("4_47if1")]
 

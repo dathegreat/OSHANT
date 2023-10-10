@@ -9,6 +9,6 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_released("click"):
 		var explosive = load("res://DA/ExplosiveBall.tscn").instantiate()
-		explosive.set_position(Vector3(10,2,0))
+		explosive.set_position(get_node("RotationAnchor/PlayerCharacter").global_position)
 		add_child(explosive)
 		explosive.explode()
