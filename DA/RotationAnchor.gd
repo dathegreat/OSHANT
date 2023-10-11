@@ -12,3 +12,5 @@ func _process(delta):
 		self.rotate_object_local(Vector3(0, 1, 0), -0.01)
 	if Input.is_action_pressed("move_right"):
 		self.rotate_object_local(Vector3(0, 1, 0), 0.01)
+	
+	#get_node("Camera3D").position.y = get_node("PlayerCharacter").position.y + 1.0

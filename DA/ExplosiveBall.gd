@@ -12,6 +12,8 @@ func explode():
 	for body in get_node("Area3D").get_overlapping_bodies():
 		if body is RigidBody3D:
 			body.freeze = false
+	await get_tree().create_timer(0.5).timeout
+	queue_free()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
