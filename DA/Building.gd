@@ -10,6 +10,8 @@ var brick_width: float = (2 * PI * cylinder_radius) / steps
 var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
 var building_texture: Image = preload("res://DA/TestBuildingMap.png").get_image()
 var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
+var brick_shader = preload("res://DA/Brick.gdshader")
+var stair_shader = preload("res://DA/Stair.gdshader")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +33,7 @@ func _ready():
 					cylinder_radius * sin(theta)
 				)
 				var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
-				var brick: RigidBody3D = create_brick(position, center, color)
+				var brick: RigidBody3D = create_brick(position, center, brick_shader)
 				add_child(brick)
 			#for every black pixel in the stair map, draw a brick
 			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
@@ -41,7 +43,7 @@ func _ready():
 					(cylinder_radius + brick_depth) * sin(theta)
 				)
 				var stair_color: Color = Color(0.9, 0.9, 0.9)
-				var stair: RigidBody3D = create_brick(stair_position, center, stair_color)
+				var stair: RigidBody3D = create_brick(stair_position, center, stair_shader)
 				add_child(stair)
 	#draw staircase on outside of building
 	#for step in range(0, steps):
@@ -63,12 +65,13 @@ func _ready():
 		#var brick: RigidBody3D = create_brick(position, center, color)
 		#add_child(brick)
 
-func create_brick(position: Vector3, center: Vector3, color: Color) -> RigidBody3D:
+func create_brick(position: Vector3, center: Vector3, shader: Shader) -> RigidBody3D:
 	var brick: MeshInstance3D = MeshInstance3D.new()
 	brick.mesh = BoxMesh.new()
 	brick.mesh.size = brick_size
-	brick.mesh.material = StandardMaterial3D.new()
-	brick.mesh.material.albedo_color = color
+	brick.mesh.material = ShaderMaterial.new()
+	brick.mesh.material.shader = shader
+	#brick.mesh.material.albedo_color = color
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.shape = BoxShape3D.new()
 	collision_shape.shape.size = brick_size
