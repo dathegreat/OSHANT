@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dnqienosbapdp" path="res://Carlos/Menus/pause_menu.tscn" id="5_yp58t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_svrbk"]
-size = Vector3(2.015, 2.08, 1)
+size = Vector3(2, 3, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3r1pf"]
 size = Vector3(2.09, 2.325, 1)
@@ -19,6 +19,7 @@ albedo_texture = ExtResource("2_y25xf")
 [sub_resource type="PlaneMesh" id="PlaneMesh_magoh"]
 lightmap_size_hint = Vector2i(12, 12)
 material = SubResource("StandardMaterial3D_qg5ys")
+size = Vector2(2, 3)
 
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("interaction_area")]
 script = ExtResource("1_ciun2")
