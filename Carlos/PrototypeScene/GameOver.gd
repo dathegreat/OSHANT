@@ -14,5 +14,3 @@ func player_death() -> void:
 	var menu_instance = game_over_ui.instantiate()
 	get_tree().root.add_child(menu_instance)
 	get_tree().paused = true
-
-

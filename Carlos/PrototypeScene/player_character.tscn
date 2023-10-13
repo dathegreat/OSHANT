@@ -24,6 +24,14 @@ material = SubResource("StandardMaterial3D_qg5ys")
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("interaction_area")]
 script = ExtResource("1_ciun2")
 interaction_area = NodePath("Interactor3D")
+speed = null
+sprint_multiplier = null
+has_acceleration = null
+acceleration = null
+deacceleration = null
+jump_height = null
+jump_peak_time = null
+jump_descent_time = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_svrbk")
@@ -35,6 +43,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19894, 0, 0)
 shape = SubResource("BoxShape3D_3r1pf")
 
 [node name="Graphic" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 0, 0)
+mesh = SubResource("PlaneMesh_magoh")
+
+[node name="Graphic" type="MeshInstance3D" parent="Graphic"]
 transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 0, 0)
 mesh = SubResource("PlaneMesh_magoh")
 

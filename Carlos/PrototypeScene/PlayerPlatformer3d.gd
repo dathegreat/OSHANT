@@ -1,9 +1,10 @@
 extends CharacterBody3D
 
 @export var interaction_area : Node
+@export var rotation_node : Node3D
 
-const SPEED = 5.0
-@export var speed := 200.0
+@export var speed := 0.1
+@export var sprint_multiplier := 1.25
 @export var has_acceleration := false
 @export var acceleration := 1_000
 @export var deacceleration := 1_000
@@ -24,11 +25,19 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += get_gravity() * delta
-
+	
+	if Input.is_action_pressed("sprint"):
+		pass
+	
+	if Input.is_action_pressed("move_left"):
+		rotation_node.rotate_player(-speed)
+	if Input.is_action_pressed("move_right"):
+		rotation_node.rotate_player(speed)
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		jump()
+	
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

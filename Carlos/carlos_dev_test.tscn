@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://snwl04su8hqn"]
+
+[ext_resource type="Script" path="res://Carlos/dev_test_carlos.gd" id="1_o26ha"]
+[ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://Carlos/PrototypeScene/player_character.tscn" id="2_tuwwg"]
+
+[node name="CarlosDevTest" type="Node3D"]
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("playerChar")]
+script = ExtResource("1_o26ha")
+playerChar = NodePath("../PlayerCharacter")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_tuwwg")]
