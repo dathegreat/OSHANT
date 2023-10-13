@@ -75,14 +75,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 40)
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 rotation_node = NodePath("..")
-speed = 0.01
-sprint_multiplier = 1.25
-has_acceleration = false
-acceleration = 1000
-deacceleration = 1000
-jump_height = 5.0
-jump_peak_time = 0.2
-jump_descent_time = 0.3
 
 [node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
