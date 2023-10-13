@@ -56,7 +56,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		print("intercacting")
 		for area in interaction_area.get_overlapping_areas():
-			if area is Interactable:
+			if area is InteractableGame:
 				area.interact()
 				return
 

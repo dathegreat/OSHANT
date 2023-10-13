@@ -8,7 +8,7 @@ func _ready():
 	position_player_from_texture()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_released("click"):
 		var explosive = load("res://DA/ExplosiveBall.tscn").instantiate()
 		explosive.set_position(get_node("RotationAnchor/PlayerCharacter").global_position)

@@ -25,13 +25,13 @@ func _ready():
 			var theta: float = rotation_step_size * step
 			#for every black pixel in the building map, draw a brick
 			if building_texture.get_pixel(building_texture.get_width() - step - 1, building_texture.get_height() - y - 1).v < 0.01:
-				var position: Vector3 = Vector3(
+				var converted_position: Vector3 = Vector3(
 					cylinder_radius * cos(theta), 
 					y * brick_height,  
 					cylinder_radius * sin(theta)
 				)
 				var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
-				var brick: RigidBody3D = create_brick(position, center, color)
+				var brick: RigidBody3D = create_brick(converted_position, center, color)
 				add_child(brick)
 			#for every black pixel in the stair map, draw a brick
 			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
@@ -63,7 +63,7 @@ func _ready():
 		#var brick: RigidBody3D = create_brick(position, center, color)
 		#add_child(brick)
 
-func create_brick(position: Vector3, center: Vector3, color: Color) -> RigidBody3D:
+func create_brick(position_to_create: Vector3, center: Vector3, color: Color) -> RigidBody3D:
 	var brick: MeshInstance3D = MeshInstance3D.new()
 	brick.mesh = BoxMesh.new()
 	brick.mesh.size = brick_size
@@ -75,12 +75,9 @@ func create_brick(position: Vector3, center: Vector3, color: Color) -> RigidBody
 	var rigid_body = RigidBody3D.new()
 	#move each brick to its given position on the cylinder and then
 	#point its face toward the center of the cylinder
-	rigid_body.look_at_from_position(position, center)
+	rigid_body.look_at_from_position(position_to_create, center)
 	rigid_body.freeze = true
 	rigid_body.add_child(collision_shape)
 	rigid_body.add_child(brick)
 	
 	return rigid_body
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
