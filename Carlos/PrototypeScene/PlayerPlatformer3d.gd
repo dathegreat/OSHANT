@@ -1,14 +1,14 @@
 extends CharacterBody3D
 
+@export_group("nodes to hook up")
 @export var interaction_area : Node
 @export var rotation_node : Node3D
 
+@export_group("player movement variables")
 @export var speed := 0.01
 @export var sprint_multiplier := 1.25
-@export var has_acceleration := false
-@export var acceleration := 1_000
-@export var deacceleration := 1_000
 
+@export_group("player jump variables")
 @export var jump_height : float = 5
 @export var jump_peak_time : float = 0.2
 @export var jump_descent_time : float = 0.3
