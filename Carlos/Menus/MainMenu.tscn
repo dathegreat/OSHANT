@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Carlos/Menus/menu_container.gd" id="1_6lk1r"]
 [ext_resource type="Script" path="res://Carlos/Menus/MainMenu.gd" id="1_482fo"]
-[ext_resource type="Texture2D" uid="uid://cq2yvxqoml24u" path="res://Art/Icons/arrow.png" id="3_dpa6d"]
+[ext_resource type="Texture2D" uid="uid://dabs8la6dh4q7" path="res://Art/Icons/arrow.png" id="3_dpa6d"]
 [ext_resource type="Script" path="res://Carlos/Menus/MainMenuHandler.gd" id="5_blwv5"]
 
 [sub_resource type="Gradient" id="Gradient_a1jec"]
