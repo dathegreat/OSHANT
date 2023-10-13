@@ -4,7 +4,6 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 @export var speed := 200.0
-@export var jump_force := 800.0
 @export var has_acceleration := false
 @export var acceleration := 1_000
 @export var deacceleration := 1_000
@@ -22,9 +21,6 @@ var gravity: float = get_gravity()
 
 
 func _physics_process(delta: float) -> void:
-	print("jump gravity: ", jump_gravity, jump_height)
-	print("jump velocity: ", jump_velocity)
-	print("fall gravity: ", fall_gravity)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += get_gravity() * delta
@@ -49,7 +45,7 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		print("intercactint")
+		print("intercacting")
 		for area in interaction_area.get_overlapping_areas():
 			if area is Interactable:
 				area.interact()

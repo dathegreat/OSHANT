@@ -11,8 +11,9 @@ func add_health(health_to_add : int):
 	if current_health > max_health:
 		current_health = max_health
 
-func remove_health(healt_to_remove : int):
-	current_health -= healt_to_remove
+func remove_health(health_to_remove : int):
+	current_health -= health_to_remove
+	print("removing health ", health_to_remove)
 	if(current_health < 0):
 		health_reached_zero()
 
