@@ -16,9 +16,9 @@ var interrupted := false
 func _process(_delta):
 	if should_move:
 		if move_left:
-			movement_node.position.x += 0.05
+			movement_node.rotate_object_local(Vector3(0, 1, 0), 0.002)
 		else:
-			movement_node.position.x -= 0.05
+			movement_node.rotate_object_local(Vector3(0, 1, 0), -0.002)
 
 func move():
 	interrupted = false

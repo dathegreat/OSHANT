@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bv6y1pneahkvr"]
+[gd_scene load_steps=9 format=3 uid="uid://bv6y1pneahkvr"]
 
 [ext_resource type="Script" path="res://Carlos/EnemyStateMachine.gd" id="1_rnpsk"]
 [ext_resource type="Script" path="res://Carlos/enemy.gd" id="1_uhge2"]
@@ -6,11 +6,13 @@
 [ext_resource type="Script" path="res://Carlos/WalkAround.gd" id="2_d2qir"]
 [ext_resource type="Script" path="res://Carlos/ChaseAfterPlayer.gd" id="4_c0ve8"]
 [ext_resource type="Script" path="res://Carlos/LostPlayer.gd" id="5_jpl4e"]
+[ext_resource type="Script" path="res://Carlos/enemy_graphics.gd" id="7_lov3a"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8yv2t"]
 
-[node name="EnemyAi" type="Node3D"]
+[node name="EnemyAi" type="Node3D" node_paths=PackedStringArray("enemy_mesh")]
 script = ExtResource("1_uhge2")
+enemy_mesh = NodePath("Graphics")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_rnpsk")
@@ -18,7 +20,7 @@ initial_state = NodePath("WalkAround")
 
 [node name="WalkAround" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("movement_node")]
 script = ExtResource("2_d2qir")
-movement_node = NodePath("../../Graphics")
+movement_node = NodePath("../..")
 
 [node name="Idle" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("2_2f0ce")
@@ -30,9 +32,7 @@ script = ExtResource("4_c0ve8")
 script = ExtResource("5_jpl4e")
 
 [node name="Graphics" type="Node3D" parent="."]
+script = ExtResource("7_lov3a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
 mesh = SubResource("CapsuleMesh_8yv2t")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 7.74116)

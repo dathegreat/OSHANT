@@ -1,11 +1,14 @@
 extends Node3D
 
-var stair_texture_data: PackedByteArray = preload("res://DA/TestStairMap.png").get_image().get_data()
+@export var enemy : PackedScene
 
+var stair_texture_data: PackedByteArray = preload("res://DA/TestStairMap.png").get_image().get_data()
+var enemy_pos : Texture
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#get_node("RotationAnchor/PlayerCharacter").position.z = get_node("Building").cylinder_radius + 1
 	position_player_from_texture()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -30,3 +33,6 @@ func position_player_from_texture():
 		(building_radius + 1.1) * sin(-theta)
 	)
 	get_node("RotationAnchor/PlayerCharacter").look_at_from_position(player_position, Vector3(0, height, 0))
+	var instance = enemy.instantiate()
+	self.add_child(instance)
+	instance.set_enemy_pos(player_position)

@@ -20,6 +20,9 @@ var fall_gravity : float = (-2.0 * jump_height) / (jump_descent_time * jump_desc
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = get_gravity()
 
+func _ready() -> void:
+	rotation_node = get_parent()
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -64,6 +67,5 @@ func get_gravity() -> float:
 	return jump_gravity if velocity.y > 0.0 else fall_gravity
 
 func jump():
-	print(jump_velocity)
 	velocity.y = jump_velocity
 

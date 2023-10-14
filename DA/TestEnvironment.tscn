@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://irba3p13okd3"]
+[gd_scene load_steps=18 format=3 uid="uid://irba3p13okd3"]
 
 [ext_resource type="Script" path="res://DA/TestEnvironment.gd" id="1_8rac5"]
 [ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="2_25sxt"]
+[ext_resource type="PackedScene" uid="uid://bv6y1pneahkvr" path="res://Carlos/enemy.tscn" id="2_jt64i"]
 [ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://Carlos/PrototypeScene/player_character.tscn" id="3_sqd75"]
 [ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="4_47if1"]
 [ext_resource type="Script" path="res://DA/Camera3D.gd" id="4_aankn"]
+[ext_resource type="PackedScene" uid="uid://d4bmlec4hc2p7" path="res://Carlos/level_exit.tscn" id="6_gllpg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwkbp"]
 
@@ -46,6 +48,7 @@ reflected_light_source = 2
 
 [node name="TestEnvironment" type="Node3D"]
 script = ExtResource("1_8rac5")
+enemy = ExtResource("2_jt64i")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v2eui")
@@ -82,5 +85,6 @@ current = true
 script = ExtResource("4_aankn")
 
 [node name="Building" parent="." instance=ExtResource("4_47if1")]
+level_exit_scene = ExtResource("6_gllpg")
 
 [connection signal="property_list_changed" from="Building" to="." method="_on_building_property_list_changed"]

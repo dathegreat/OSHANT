@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://snwl04su8hqn"]
+[gd_scene load_steps=7 format=3 uid="uid://snwl04su8hqn"]
 
 [ext_resource type="Script" path="res://Carlos/dev_test_carlos.gd" id="1_o26ha"]
 [ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://Carlos/PrototypeScene/player_character.tscn" id="2_tuwwg"]
-[ext_resource type="Script" path="res://Carlos/Interaction.gd" id="3_uuery"]
+[ext_resource type="PackedScene" uid="uid://d4bmlec4hc2p7" path="res://Carlos/level_exit.tscn" id="3_8wj3v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybhlq"]
 albedo_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
@@ -12,15 +12,6 @@ material = SubResource("StandardMaterial3D_ybhlq")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sxe3f"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qd8ax"]
-albedo_color = Color(0.901961, 0.309804, 0.305882, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_j7x07"]
-material = SubResource("StandardMaterial3D_qd8ax")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_sn7u4"]
-size = Vector3(3.03238, 2.11793, 2.06882)
 
 [node name="CarlosDevTest" type="Node3D"]
 
@@ -39,15 +30,4 @@ mesh = SubResource("PlaneMesh_6o5yr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_sxe3f")
 
-[node name="Interactor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56501, -0.60324, 0)
-mesh = SubResource("BoxMesh_j7x07")
-
-[node name="Interaction" type="Area3D" parent="Interactor"]
-collision_layer = 8
-collision_mask = 8
-script = ExtResource("3_uuery")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactor/Interaction"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0886908, 0.558964, -0.199336)
-shape = SubResource("BoxShape3D_sn7u4")
+[node name="Interaction" parent="." instance=ExtResource("3_8wj3v")]
