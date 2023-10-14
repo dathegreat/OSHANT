@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bv6y1pneahkvr"]
+[gd_scene load_steps=10 format=3 uid="uid://bv6y1pneahkvr"]
 
 [ext_resource type="Script" path="res://Carlos/EnemyStateMachine.gd" id="1_rnpsk"]
 [ext_resource type="Script" path="res://Carlos/enemy.gd" id="1_uhge2"]
@@ -6,13 +6,15 @@
 [ext_resource type="Script" path="res://Carlos/WalkAround.gd" id="2_d2qir"]
 [ext_resource type="Script" path="res://Carlos/ChaseAfterPlayer.gd" id="4_c0ve8"]
 [ext_resource type="Script" path="res://Carlos/LostPlayer.gd" id="5_jpl4e"]
-[ext_resource type="Script" path="res://Carlos/enemy_graphics.gd" id="7_lov3a"]
+[ext_resource type="Script" path="res://Carlos/EnemyCharacyerBody.gd" id="7_0trb4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f575e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8yv2t"]
 
 [node name="EnemyAi" type="Node3D" node_paths=PackedStringArray("enemy_mesh")]
 script = ExtResource("1_uhge2")
-enemy_mesh = NodePath("Graphics")
+enemy_mesh = NodePath("CharacterBody3D")
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_rnpsk")
@@ -31,8 +33,17 @@ script = ExtResource("4_c0ve8")
 [node name="LostPlayer" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("5_jpl4e")
 
-[node name="Graphics" type="Node3D" parent="."]
-script = ExtResource("7_lov3a")
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("7_0trb4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Graphics"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_f575e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 mesh = SubResource("CapsuleMesh_8yv2t")
+skeleton = NodePath("")

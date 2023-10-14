@@ -23,7 +23,7 @@ func _process(_delta):
 func move():
 	interrupted = false
 	var amount_to_move = randf_range(min_move_time, max_move_time)
-	move_left = randi_range(0,1)
+	move_left = randi() % 2 == 0
 	should_move = true
 	
 	await get_tree().create_timer(amount_to_move).timeout
