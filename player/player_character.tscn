@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cob13pr8mat6h"]
+[gd_scene load_steps=30 format=3 uid="uid://cob13pr8mat6h"]
 
 [ext_resource type="Script" path="res://player/PlayerPlatformer3d.gd" id="1_ciun2"]
 [ext_resource type="Script" path="res://player/player-collision.gd" id="2_mugoj"]
@@ -8,6 +8,22 @@
 [ext_resource type="PackedScene" uid="uid://dnqienosbapdp" path="res://Menus/pause/pause_menu.tscn" id="5_yp58t"]
 [ext_resource type="Script" path="res://Menus/game_over/GameOver.gd" id="6_8b1in"]
 [ext_resource type="PackedScene" uid="uid://fmg5txlwro1h" path="res://Menus/game_over/game_over.tscn" id="7_sossf"]
+[ext_resource type="Texture2D" uid="uid://k7d08lhrlinm" path="res://Art/hunk/idle/hunk_idle1.png" id="9_oneyv"]
+[ext_resource type="Texture2D" uid="uid://ds6rrxmkp6q8j" path="res://Art/hunk/idle/hunk_idle2.png" id="10_x7u5l"]
+[ext_resource type="Texture2D" uid="uid://cyutui1v1rdcy" path="res://Art/hunk/idle/hunk_idle3.png" id="11_bo67e"]
+[ext_resource type="Texture2D" uid="uid://d6sd17043nuq" path="res://Art/hunk/idle/hunk_idle4.png" id="12_6iknk"]
+[ext_resource type="Texture2D" uid="uid://b0qtama1eugtw" path="res://Art/hunk/punch/hunk_punch1.png" id="13_n062x"]
+[ext_resource type="Texture2D" uid="uid://csrvsbq4e0rxq" path="res://Art/hunk/punch/hunk_punch2.png" id="14_q4obw"]
+[ext_resource type="Texture2D" uid="uid://dovyywacuemfm" path="res://Art/hunk/punch/hunk_punch3.png" id="15_ok3ey"]
+[ext_resource type="Texture2D" uid="uid://cwqytdh2mumpr" path="res://Art/hunk/punch/hunk_punch4.png" id="16_v7iwk"]
+[ext_resource type="Texture2D" uid="uid://biythnaibhl5o" path="res://Art/hunk/punch/hunk_punch5.png" id="17_x77xx"]
+[ext_resource type="Texture2D" uid="uid://drv5wbnjo67da" path="res://Art/hunk/punch/hunk_punch6.png" id="18_xd44d"]
+[ext_resource type="Texture2D" uid="uid://cknupwfwwf8e1" path="res://Art/hunk/punch/hunk_punch7.png" id="19_5jf8l"]
+[ext_resource type="Texture2D" uid="uid://krbaeshpsyqw" path="res://Art/hunk/punch/hunk_punch8.png" id="20_1drix"]
+[ext_resource type="Texture2D" uid="uid://bn5md0pb4ue62" path="res://Art/hunk/run/hunk_run1.png" id="21_7xqc0"]
+[ext_resource type="Texture2D" uid="uid://cx1mkltf56mog" path="res://Art/hunk/run/hunk_run2.png" id="22_soiow"]
+[ext_resource type="Texture2D" uid="uid://b6oh3k3y2q2m3" path="res://Art/hunk/run/hunk_run3.png" id="23_pm0l8"]
+[ext_resource type="Texture2D" uid="uid://n67hxhwdmwvv" path="res://Art/hunk/run/hunk_run4.png" id="24_paedn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_svrbk"]
 size = Vector3(2, 3, 1)
@@ -23,6 +39,72 @@ albedo_texture = ExtResource("2_y25xf")
 lightmap_size_hint = Vector2i(12, 12)
 material = SubResource("StandardMaterial3D_qg5ys")
 size = Vector2(2, 3)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rw135"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_oneyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_x7u5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bo67e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6iknk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_n062x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_q4obw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ok3ey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_v7iwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_x77xx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_xd44d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5jf8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1drix")
+}],
+"loop": false,
+"name": &"punching",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_7xqc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_soiow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_pm0l8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_paedn")
+}],
+"loop": false,
+"name": &"running",
+"speed": 5.0
+}]
 
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("interaction_area")]
 script = ExtResource("1_ciun2")
@@ -42,6 +124,7 @@ shape = SubResource("BoxShape3D_3r1pf")
 
 [node name="Graphic" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_magoh")
 
 [node name="Graphic" type="MeshInstance3D" parent="Graphic"]
@@ -66,3 +149,11 @@ game_over_ui = ExtResource("7_sossf")
 [node name="CoyoteTimer" type="Timer" parent="Systems"]
 wait_time = 0.15
 one_shot = true
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_rw135")
+animation = &"idle"
+autoplay = "idle"
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
