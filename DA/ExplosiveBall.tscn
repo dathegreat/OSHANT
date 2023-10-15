@@ -1,13 +1,82 @@
-[gd_scene load_steps=4 format=3 uid="uid://e8l684w2rr4d"]
+[gd_scene load_steps=15 format=3 uid="uid://e8l684w2rr4d"]
 
 [ext_resource type="Script" path="res://DA/ExplosiveBall.gd" id="1_7w70c"]
+[ext_resource type="Texture2D" uid="uid://c6hr44fqp1rrf" path="res://DA/ExplosionSpriteSheet.png" id="2_sdt0k"]
+[ext_resource type="Texture2D" uid="uid://c7eh3xyo65j2v" path="res://DA/C4Image.png" id="3_6vn8g"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ytm3e"]
 radius = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_to71i"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.14902)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7khpn"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clj0f"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41n60"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orvjq"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgig0"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elvso"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u0do"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sop8"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e1ak"]
+atlas = ExtResource("2_sdt0k")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c1glp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7khpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clj0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41n60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orvjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgig0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elvso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8u0do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sop8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e1ak")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="ExplosiveBall" type="Node3D"]
 script = ExtResource("1_7w70c")
@@ -21,6 +90,17 @@ gravity = -100.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_ytm3e")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Area3D"]
-radius = 2.0
-material = SubResource("StandardMaterial3D_to71i")
+[node name="ExplosionSprite" type="AnimatedSprite3D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_c1glp")
+frame = 3
+frame_progress = 0.352477
+
+[node name="ChargeSprite" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource("3_6vn8g")
+
+[node name="FlashSphere" type="OmniLight3D" parent="."]
+visible = false
+light_color = Color(0.937255, 0.862745, 0.592157, 1)
+light_energy = 5.984
