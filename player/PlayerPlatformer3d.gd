@@ -22,8 +22,11 @@ var fall_gravity : float = (-2.0 * jump_height) / (jump_descent_time * jump_desc
 var gravity: float = get_gravity()
 var was_on_floor = false
 
+var animation_sprite
+
 func _ready() -> void:
 	rotation_node = get_parent()
+	animation_sprite = get_node("AnimatedSprite3D")
 
 var can_move = true
 func _physics_process(delta: float) -> void:
@@ -36,16 +39,19 @@ func _physics_process(delta: float) -> void:
 	if can_move:
 		if Input.is_action_pressed("sprint"):
 			player_speed *= sprint_multiplier
-		
+			
 		if Input.is_action_pressed("move_left"):
+			animation_sprite.flip_h = true
+			animation_sprite.play("running")
 			rotation_node.rotate_player(-player_speed)
 		if Input.is_action_pressed("move_right"):
+			animation_sprite.flip_h = false
+			animation_sprite.play("running")
 			rotation_node.rotate_player(player_speed)
-		
-		
-		
+
 		# Handle jump.
 		if Input.is_action_just_pressed("ui_accept") and (is_on_floor() || !coyote_timer.is_stopped()):
+			animation_sprite.play("idle")
 			jump()
 		
 
@@ -78,3 +84,7 @@ func get_gravity() -> float:
 func jump():
 	velocity.y = jump_velocity
 
+
+
+func _on_animated_sprite_3d_animation_finished():
+	animation_sprite.play("idle")
