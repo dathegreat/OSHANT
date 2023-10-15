@@ -1,6 +1,6 @@
 extends Node3D
 
-
+@export var brick_count_to_win: int = 100
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var player_position = get_node("Building").player_starting_position
@@ -19,6 +19,12 @@ func _process(delta):
 		EventBus.emit_signal("end_level")
 
 func _on_level_end():
+	var brick_demolition_count: int = 0
 	for explosive in get_node("ChargeContainer").get_children():
-		explosive.explode()
+		var bricks_destroyed = await explosive.explode()
+		brick_demolition_count += bricks_destroyed
+	if brick_demolition_count >= brick_count_to_win:
+		print("sweet, you won")
+	else: 
+		print("you lost and destroyed", brick_demolition_count, " bricks")
 	
