@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bv6y1pneahkvr"]
+[gd_scene load_steps=20 format=3 uid="uid://bv6y1pneahkvr"]
 
 [ext_resource type="Script" path="res://scripts/state_machines/EnemyStateMachine.gd" id="1_rnpsk"]
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_uhge2"]
@@ -8,6 +8,13 @@
 [ext_resource type="Script" path="res://scripts/state_machines/LostPlayer.gd" id="5_jpl4e"]
 [ext_resource type="Script" path="res://enemy/EnemyCharacyerBody.gd" id="7_0trb4"]
 [ext_resource type="Script" path="res://enemy/DamageArea.gd" id="8_n186x"]
+[ext_resource type="Texture2D" uid="uid://c2ju40kxqu8k4" path="res://Art/goon/idle/goon_idle1.png" id="9_3h58j"]
+[ext_resource type="Texture2D" uid="uid://f8btpk17gyu2" path="res://Art/goon/idle/goon_idle2.png" id="10_52xp5"]
+[ext_resource type="Texture2D" uid="uid://dwneppwy87pm1" path="res://Art/goon/idle/goon_idle3.png" id="11_0mhl3"]
+[ext_resource type="Texture2D" uid="uid://dpl5pe8weptnd" path="res://Art/goon/idle/goon_idle4.png" id="12_jixq5"]
+[ext_resource type="Texture2D" uid="uid://0ec3wo63ln0g" path="res://Art/goon/aggro/goon_aggro1.png" id="13_p1yei"]
+[ext_resource type="Texture2D" uid="uid://4gvmvkd6qqel" path="res://Art/goon/aggro/goon_aggro2.png" id="14_0ow0e"]
+[ext_resource type="Script" path="res://enemy/AnimatedSprite3D.gd" id="15_7nlqn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f575e"]
 
@@ -15,6 +22,37 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ypao"]
 size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eygox"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3h58j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_52xp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0mhl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jixq5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_p1yei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0ow0e")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
 
 [node name="EnemyAi" type="Node3D" node_paths=PackedStringArray("enemy_mesh")]
 script = ExtResource("1_uhge2")
@@ -49,6 +87,7 @@ script = ExtResource("7_0trb4")
 shape = SubResource("CapsuleShape3D_f575e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+visible = false
 mesh = SubResource("CapsuleMesh_8yv2t")
 skeleton = NodePath("")
 
@@ -61,3 +100,10 @@ script = ExtResource("8_n186x")
 shape = SubResource("BoxShape3D_8ypao")
 
 [node name="Node" type="Node" parent="CharacterBody3D/DamageArea"]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="CharacterBody3D"]
+transform = Transform3D(4, 0, 0, 0, 5.5, 0, 0, 0, 1, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_eygox")
+animation = &"moving"
+autoplay = "idle"
+script = ExtResource("15_7nlqn")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://e8l684w2rr4d"]
 
 [ext_resource type="Script" path="res://DA/ExplosiveBall.gd" id="1_7w70c"]
-[ext_resource type="Texture2D" path="res://DA/ExplosionSpriteSheet.png" id="2_sdt0k"]
-[ext_resource type="Texture2D" path="res://DA/C4Image.png" id="3_6vn8g"]
+[ext_resource type="Texture2D" uid="uid://c6hr44fqp1rrf" path="res://DA/ExplosionSpriteSheet.png" id="2_sdt0k"]
+[ext_resource type="Texture2D" uid="uid://c7eh3xyo65j2v" path="res://DA/C4Image.png" id="3_6vn8g"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ytm3e"]
 radius = 2.0
