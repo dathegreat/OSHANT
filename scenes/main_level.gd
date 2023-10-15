@@ -12,7 +12,7 @@ func _ready():
 	var enemy_heights = get_node("Building").enemy_starting_heights
 	for i in range(0, enemy_positions.size()):
 		var enemy = load("res://enemy/enemy.tscn").instantiate()
-		enemy.look_at_from_position(enemy_positions[i], Vector3(0, enemy_heights[i], 0))
+		enemy.init_enemy(enemy_positions[i], Vector3(0, enemy_heights[i], 0))
 		add_child(enemy)
 		print("enemy position ", enemy_positions[i])
 	EventBus.end_level.connect(_on_level_end)

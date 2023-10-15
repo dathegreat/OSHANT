@@ -5,3 +5,6 @@ var facing_left : bool
 
 func set_enemy_pos(position_to_set : Vector3):
 	enemy_mesh.position = position_to_set
+
+func init_enemy(pos: Vector3, look: Vector3):
+	enemy_mesh.look_at_from_position(pos, look)
