@@ -8,6 +8,7 @@ func button_pressed(item):
 	match item:
 		0:
 			pause_menu_handler.close()
+			MusicManager.normal_effect()
 		1:
 			get_tree().paused = false
 			MusicManager.play_intro()

@@ -12,6 +12,7 @@ extends CharacterBody3D
 @export var jump_height : float = 5
 @export var jump_peak_time : float = 0.2
 @export var jump_descent_time : float = 0.3
+@onready var coyote_timer: Timer = $Systems/CoyoteTimer
 
 var jump_velocity : float = (2.0 * jump_height) / jump_peak_time
 var jump_gravity : float = (-2.0 * jump_height) / (jump_peak_time * jump_peak_time)
@@ -19,28 +20,34 @@ var fall_gravity : float = (-2.0 * jump_height) / (jump_descent_time * jump_desc
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = get_gravity()
+var was_on_floor = false
 
 func _ready() -> void:
 	rotation_node = get_parent()
 
-
+var can_move = true
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	was_on_floor = is_on_floor()
 	if not is_on_floor():
 		velocity.y += get_gravity() * delta
 	var player_speed = speed
-	if Input.is_action_pressed("sprint"):
-		player_speed *= sprint_multiplier
 	
-	if Input.is_action_pressed("move_left"):
-		rotation_node.rotate_player(-player_speed)
-	if Input.is_action_pressed("move_right"):
-		rotation_node.rotate_player(player_speed)
-	
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		jump()
-	
+	if can_move:
+		if Input.is_action_pressed("sprint"):
+			player_speed *= sprint_multiplier
+		
+		if Input.is_action_pressed("move_left"):
+			rotation_node.rotate_player(-player_speed)
+		if Input.is_action_pressed("move_right"):
+			rotation_node.rotate_player(player_speed)
+		
+		
+		
+		# Handle jump.
+		if Input.is_action_just_pressed("ui_accept") and (is_on_floor() || !coyote_timer.is_stopped()):
+			jump()
+		
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -54,6 +61,8 @@ func _physics_process(delta: float) -> void:
 		#velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	if was_on_floor && !is_on_floor():
+			coyote_timer.start()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):

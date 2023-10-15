@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cob13pr8mat6h"]
+[gd_scene load_steps=13 format=3 uid="uid://cob13pr8mat6h"]
 
 [ext_resource type="Script" path="res://player/PlayerPlatformer3d.gd" id="1_ciun2"]
+[ext_resource type="Script" path="res://player/player-collision.gd" id="2_mugoj"]
 [ext_resource type="Texture2D" uid="uid://cxhm1rwmpx1gm" path="res://scenes/Felonius.png" id="2_y25xf"]
 [ext_resource type="Script" path="res://player/Health.gd" id="3_7y4ox"]
 [ext_resource type="Script" path="res://scripts/global/PauseSystem.gd" id="4_dsk0q"]
@@ -29,6 +30,7 @@ interaction_area = NodePath("Interactor3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_svrbk")
+script = ExtResource("2_mugoj")
 
 [node name="Interactor3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19894, 0, 0)
@@ -50,6 +52,7 @@ mesh = SubResource("PlaneMesh_magoh")
 
 [node name="Health" type="Node" parent="Systems"]
 script = ExtResource("3_7y4ox")
+has_invincibility_cooldown = true
 
 [node name="Pause_System" type="Node" parent="Systems"]
 process_mode = 3
@@ -59,3 +62,7 @@ pause_menu_ui = ExtResource("5_yp58t")
 [node name="GameOver" type="Node" parent="Systems"]
 script = ExtResource("6_8b1in")
 game_over_ui = ExtResource("7_sossf")
+
+[node name="CoyoteTimer" type="Timer" parent="Systems"]
+wait_time = 0.15
+one_shot = true

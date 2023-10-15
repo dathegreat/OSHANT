@@ -1,14 +1,17 @@
 [gd_scene load_steps=17 format=3 uid="uid://bgs472tq8i2ni"]
+[gd_scene load_steps=18 format=3 uid="uid://bgs472tq8i2ni"]
 
 [ext_resource type="Script" path="res://scenes/main_level.gd" id="1_hwkj6"]
 [ext_resource type="Shader" path="res://DA/TestEnvironment.gdshader" id="1_llu8q"]
 [ext_resource type="Texture2D" uid="uid://baq12vgmo3k6t" path="res://icon.png" id="2_8l8vm"]
 [ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="3_r7krh"]
 [ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://player/player_character.tscn" id="4_4aatm"]
-[ext_resource type="Texture2D" uid="uid://ywsg1ehrryo0" path="res://scenes/NightSky.hdr" id="5_ilrek"]
+[ext_resource type="Environment" uid="uid://c5lynkhbnfosb" path="res://scenes/level_env.tres" id="5_ooi2q"]
 [ext_resource type="Script" path="res://DA/Camera3D.gd" id="6_veprd"]
 [ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="7_l3t53"]
 [ext_resource type="PackedScene" uid="uid://d4bmlec4hc2p7" path="res://components/level_exit.tscn" id="8_phju1"]
+[ext_resource type="Script" path="res://scenes/Intro_to_level.gd" id="9_xf4au"]
+[ext_resource type="Script" path="res://Art/effects/ghost_text_effect.gd" id="10_4ww6a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t63vv"]
 
@@ -22,20 +25,24 @@ albedo_color = Color(0, 0.164706, 0.0588235, 1)
 shader = ExtResource("1_llu8q")
 shader_parameter/pixelate_amount = 256.0
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wcy4l"]
-panorama = ExtResource("5_ilrek")
+[sub_resource type="RichTextEffect" id="RichTextEffect_3lmuw"]
+script = ExtResource("10_4ww6a")
 
-[sub_resource type="Sky" id="Sky_255mx"]
-sky_material = SubResource("PanoramaSkyMaterial_wcy4l")
+[sub_resource type="Animation" id="Animation_o1p3t"]
+resource_name = "cam_animation"
+length = 4.0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.998663, 0, 0.0516998, 4, 1, 0, 0, 0, 1)
 
-[sub_resource type="Environment" id="Environment_ht8qx"]
-background_mode = 2
-background_energy_multiplier = 0.5
-sky = SubResource("Sky_255mx")
-glow_bloom = 0.1
-fog_enabled = true
-fog_light_color = Color(0.223529, 0.537255, 0.654902, 1)
-fog_light_energy = 0.8
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xdb1"]
+_data = {
+"cam_animation": SubResource("Animation_o1p3t")
+}
 
 [node name="MainLevel" type="Node3D"]
 script = ExtResource("1_hwkj6")
@@ -78,6 +85,8 @@ axis_lock_linear_z = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 environment = SubResource("Environment_ht8qx")
 current = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 11.0175)
+environment = ExtResource("5_ooi2q")
 script = ExtResource("6_veprd")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="RotationAnchor/PlayerCharacter"]
@@ -99,3 +108,45 @@ spot_range = 50.117
 
 [node name="Building" parent="." instance=ExtResource("7_l3t53")]
 level_exit_scene = ExtResource("8_phju1")
+
+[node name="Intro_to_level" type="Node3D" parent="." node_paths=PackedStringArray("anim_cam", "game_cam", "player")]
+transform = Transform3D(-0.994654, 0, 0.103261, 0, 1, 0, -0.103261, 0, -0.994654, 0, 0, 0)
+script = ExtResource("9_xf4au")
+anim_cam = NodePath("anim_cam")
+game_cam = NodePath("../RotationAnchor/PlayerCharacter/Camera3D")
+player = NodePath("../RotationAnchor/PlayerCharacter")
+
+[node name="anim_cam" type="Camera3D" parent="Intro_to_level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.8715, 90.76)
+environment = ExtResource("5_ooi2q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Intro_to_level/anim_cam"]
+follow_viewport_enabled = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Intro_to_level/anim_cam/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -429.0
+offset_top = -49.0
+offset_right = 425.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][shake rate=5.0 level=5 connected=1]Destroy The Building[/shake][/center]
+[center][shake rate=20.0 level=5 connected=1]Destroy Occupational Safety and Health Regulations!!![/shake][/center]
+"
+fit_content = true
+custom_effects = [SubResource("RichTextEffect_3lmuw")]
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Intro_to_level"]
+libraries = {
+"": SubResource("AnimationLibrary_0xdb1")
+}
+
+[connection signal="animation_finished" from="Intro_to_level/AnimationPlayer" to="Intro_to_level" method="_on_animation_player_animation_finished"]
