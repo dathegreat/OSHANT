@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://np3ypsht83p2"]
+
+[ext_resource type="Texture2D" uid="uid://d5wq8n70jk6f" path="res://DA/brick_texture.jpg" id="1_35nrb"]
+[ext_resource type="Texture2D" uid="uid://cqct0dugjy0nw" path="res://DA/BrickImage.png" id="1_o6p3l"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.337255, 0.466667, 0.556863, 1)
+albedo_texture = ExtResource("1_o6p3l")
+ao_light_affect = 0.41
+subsurf_scatter_strength = 0.93
+refraction_scale = 0.37
+detail_albedo = ExtResource("1_35nrb")
+grow_amount = -0.21

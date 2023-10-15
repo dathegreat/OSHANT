@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://player/player_character.tscn" id="3_sqd75"]
 [ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="4_47if1"]
 [ext_resource type="Script" path="res://DA/Camera3D.gd" id="4_aankn"]
+<<<<<<< HEAD
+[ext_resource type="Shader" path="res://DA/TestEnvironment.gdshader" id="5_dioky"]
+[ext_resource type="Texture2D" uid="uid://ywsg1ehrryo0" path="res://DA/NightSky.hdr" id="6_g1hph"]
+[ext_resource type="Texture2D" uid="uid://baq12vgmo3k6t" path="res://icon.png" id="7_da6ob"]
+=======
 [ext_resource type="PackedScene" uid="uid://d4bmlec4hc2p7" path="res://components/level_exit.tscn" id="6_gllpg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwkbp"]
@@ -24,6 +29,7 @@ glow_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8dvmy"]
 dof_blur_amount = 0.02
+>>>>>>> dev
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
 
@@ -31,32 +37,38 @@ dof_blur_amount = 0.02
 size = Vector3(244.044, 0, 322.817)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj7jq"]
-albedo_color = Color(0, 0.313726, 0.129412, 1)
+albedo_color = Color(0, 0.164706, 0.0588235, 1)
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qkxud"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0t0c8"]
+shader = ExtResource("5_dioky")
+shader_parameter/pixelate_amount = 256.0
 
-[sub_resource type="Sky" id="Sky_17w6c"]
-sky_material = SubResource("PhysicalSkyMaterial_qkxud")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1ydqm"]
+panorama = ExtResource("6_g1hph")
+
+[sub_resource type="Sky" id="Sky_255mx"]
+sky_material = SubResource("PanoramaSkyMaterial_1ydqm")
 
 [sub_resource type="Environment" id="Environment_mfcpt"]
 background_mode = 2
-sky = SubResource("Sky_17w6c")
-sky_custom_fov = 98.5
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_255mx")
+glow_bloom = 0.1
+fog_enabled = true
+fog_light_color = Color(0.223529, 0.537255, 0.654902, 1)
+fog_light_energy = 0.8
 
 [node name="TestEnvironment" type="Node3D"]
 script = ExtResource("1_8rac5")
 enemy = ExtResource("2_jt64i")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v2eui")
-camera_attributes = SubResource("CameraAttributesPractical_8dvmy")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 34.2085, 33.4116)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.075, 0)
+light_color = Color(0.686275, 0.835294, 1, 1)
+light_energy = 0.807
+light_angular_distance = 15.18
 shadow_enabled = true
+sky_mode = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_lvrj5")
@@ -69,6 +81,12 @@ shape = SubResource("BoxShape3D_2payb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1718, -1, -73.7149)
 size = Vector3(205.761, 1, 254.084)
 material = SubResource("StandardMaterial3D_cj7jq")
+
+[node name="PixelateMask" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0t0c8")
+position = Vector2(576, 324)
+scale = Vector2(18, 10.125)
+texture = ExtResource("7_da6ob")
 
 [node name="RotationAnchor" type="Node3D" parent="."]
 script = ExtResource("2_25sxt")
@@ -83,6 +101,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 33.0996)
 environment = SubResource("Environment_mfcpt")
 current = true
 script = ExtResource("4_aankn")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="RotationAnchor/PlayerCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+light_color = Color(1, 0.984314, 0.976471, 1)
+light_energy = 16.0
+light_indirect_energy = 0.0
+spot_range = 454.439
+spot_attenuation = 1.10957
+spot_angle = 20.72
+spot_angle_attenuation = 1.31951
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="RotationAnchor/PlayerCharacter"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 0.952941, 0.905882, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 50.117
 
 [node name="Building" parent="." instance=ExtResource("4_47if1")]
 level_exit_scene = ExtResource("6_gllpg")
