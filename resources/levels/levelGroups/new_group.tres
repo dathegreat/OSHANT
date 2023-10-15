@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelGroup" load_steps=3 format=3 uid="uid://8bc6yl6m8pdo"]
+
+[ext_resource type="Script" path="res://scripts/level_group_resource.gd" id="1_iworo"]
+[ext_resource type="Resource" path="res://resources/levels/individualLevels/Level1.tres" id="1_udr8e"]
+
+[resource]
+script = ExtResource("1_iworo")
+level_group_name = "Game"
+levels = Array[Resource("res://scripts/level_resource.gd")]([ExtResource("1_udr8e")])
