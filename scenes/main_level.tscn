@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bgs472tq8i2ni"]
+[gd_scene load_steps=18 format=3 uid="uid://bgs472tq8i2ni"]
 
 [ext_resource type="Script" path="res://scenes/main_level.gd" id="1_hwkj6"]
 [ext_resource type="Shader" path="res://DA/TestEnvironment.gdshader" id="1_llu8q"]
@@ -27,22 +27,6 @@ shader_parameter/pixelate_amount = 256.0
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_3lmuw"]
 script = ExtResource("10_4ww6a")
-
-[sub_resource type="Animation" id="Animation_o1p3t"]
-resource_name = "cam_animation"
-length = 4.0
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.998663, 0, 0.0516998, 4, 1, 0, 0, 0, 1)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xdb1"]
-_data = {
-"cam_animation": SubResource("Animation_o1p3t")
-}
 
 [node name="MainLevel" type="Node3D"]
 script = ExtResource("1_hwkj6")
@@ -107,21 +91,25 @@ spot_range = 50.117
 level_group = ExtResource("9_vftj0")
 level_exit_scene = ExtResource("8_phju1")
 
-[node name="Intro_to_level" type="Node3D" parent="." node_paths=PackedStringArray("anim_cam", "game_cam", "player")]
-transform = Transform3D(-0.994654, 0, 0.103261, 0, 1, 0, -0.103261, 0, -0.994654, 0, 0, 0)
+[node name="Intro_to_level" type="Node3D" parent="." node_paths=PackedStringArray("anim_cam", "game_cam", "player", "player_rotater")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("9_xf4au")
-anim_cam = NodePath("anim_cam")
+anim_cam = NodePath("Cam_rotator/anim_cam")
 game_cam = NodePath("../RotationAnchor/PlayerCharacter/Camera3D")
 player = NodePath("../RotationAnchor/PlayerCharacter")
+player_rotater = NodePath("../RotationAnchor")
 
-[node name="anim_cam" type="Camera3D" parent="Intro_to_level"]
+[node name="Cam_rotator" type="Node3D" parent="Intro_to_level"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="anim_cam" type="Camera3D" parent="Intro_to_level/Cam_rotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.8715, 90.76)
 environment = ExtResource("5_ooi2q")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Intro_to_level/anim_cam"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Intro_to_level/Cam_rotator/anim_cam"]
 follow_viewport_enabled = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Intro_to_level/anim_cam/CanvasLayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Intro_to_level/Cam_rotator/anim_cam/CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -142,11 +130,26 @@ custom_effects = [SubResource("RichTextEffect_3lmuw")]
 visible_characters = 0
 visible_ratio = 0.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Intro_to_level"]
-libraries = {
-"": SubResource("AnimationLibrary_0xdb1")
-}
+[node name="End Game Canvas" type="CanvasLayer" parent="Intro_to_level/Cam_rotator/anim_cam"]
+visible = false
+follow_viewport_enabled = true
+
+[node name="EndGameLabel" type="RichTextLabel" parent="Intro_to_level/Cam_rotator/anim_cam/End Game Canvas"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -429.0
+offset_top = -49.0
+offset_right = 425.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+fit_content = true
+custom_effects = [SubResource("RichTextEffect_3lmuw")]
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="ChargeContainer" type="Node3D" parent="."]
-
-[connection signal="animation_finished" from="Intro_to_level/AnimationPlayer" to="Intro_to_level" method="_on_animation_player_animation_finished"]

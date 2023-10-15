@@ -25,6 +25,8 @@ func _on_level_end():
 		brick_demolition_count += bricks_destroyed
 	if brick_demolition_count >= brick_count_to_win:
 		print("sweet, you won")
+		EventBus.emit_signal("score", false, brick_demolition_count)
 	else: 
 		print("you lost and destroyed", brick_demolition_count, " bricks")
+		EventBus.emit_signal("score", true, brick_demolition_count)
 	
