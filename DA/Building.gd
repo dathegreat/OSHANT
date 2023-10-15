@@ -32,6 +32,8 @@ var stair_shader = preload("res://DA/Stair.gdshader")
 var player_starting_position: Vector3
 var player_starting_height: float
 
+var enemy_starting_positions = []
+var enemy_starting_heights = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generate_building(current_level)
@@ -43,6 +45,7 @@ func generate_building(level_to_build : int):
 	building_texture = build_level.background_layer.get_image()
 	stair_texture = build_level.stair_layer.get_image()
 	level_exit_texture = build_level.exit_level_layer.get_image()
+	enemy_placement_texture = build_level.enemy_layer.get_image()
 	player_placement_texture = build_level.player_layer.get_image()
 	for step in range(0, steps):
 		for y in range(0, height):
@@ -79,6 +82,13 @@ func generate_building(level_to_build : int):
 					(cylinder_radius + 0.5 + brick_depth) * sin(theta)
 				)
 				player_starting_height = y * brick_height
+			if enemy_placement_texture.get_pixel(enemy_placement_texture.get_width() - step - 1, enemy_placement_texture.get_height() - y - 1).v < 0.01:
+				enemy_starting_positions.append( Vector3(
+					(cylinder_radius + 0.5 + brick_depth) * cos(theta), 
+					y * brick_height,  
+					(cylinder_radius + 0.5 + brick_depth) * sin(theta)
+				))
+				enemy_starting_heights.append(y * brick_height)
 			if level_exit_texture.get_pixel(level_exit_texture.get_width() - step - 1, level_exit_texture.get_height() - y - 1).v < 0.01:
 				var level_exit_pos:= Vector3(
 					(cylinder_radius + brick_depth) * cos(theta), 

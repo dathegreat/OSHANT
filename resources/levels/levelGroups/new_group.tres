@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelGroup" load_steps=3 format=3 uid="uid://8bc6yl6m8pdo"]
 
 [ext_resource type="Script" path="res://scripts/level_group_resource.gd" id="1_iworo"]
-[ext_resource type="Resource" uid="uid://dmcxgwm3gc727" path="res://resources/levels/individualLevels/Level1.tres" id="1_udr8e"]
+[ext_resource type="Resource" uid="uid://bu6pdwelh06u1" path="res://resources/levels/individualLevels/Level1.tres" id="1_udr8e"]
 
 [resource]
 script = ExtResource("1_iworo")
