@@ -69,6 +69,7 @@ axis_lock_linear_z = true
 [node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 11.0175)
 environment = ExtResource("5_ooi2q")
+current = true
 script = ExtResource("6_veprd")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="RotationAnchor/PlayerCharacter"]
