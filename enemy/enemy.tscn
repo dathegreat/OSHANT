@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bv6y1pneahkvr"]
+[gd_scene load_steps=11 format=3 uid="uid://bv6y1pneahkvr"]
 
 [ext_resource type="Script" path="res://scripts/state_machines/EnemyStateMachine.gd" id="1_rnpsk"]
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_uhge2"]
@@ -11,6 +11,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f575e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8yv2t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ypao"]
+size = Vector3(1.5, 1.5, 1.5)
 
 [node name="EnemyAi" type="Node3D" node_paths=PackedStringArray("enemy_mesh")]
 script = ExtResource("1_uhge2")
@@ -47,3 +50,8 @@ shape = SubResource("CapsuleShape3D_f575e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 mesh = SubResource("CapsuleMesh_8yv2t")
 skeleton = NodePath("")
+
+[node name="DamageArea" type="Area3D" parent="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/DamageArea"]
+shape = SubResource("BoxShape3D_8ypao")

@@ -4,6 +4,7 @@ class_name HealthComponent
 @export var current_health : int = 100
 @export var max_health : int = 100
 @export var has_invincibility_cooldown :=false
+@export var is_player := false
 
 signal health_is_zero
 
@@ -18,6 +19,8 @@ func remove_health(health_to_remove : int):
 	if(can_be_damaged):
 		current_health -= health_to_remove
 		print("removing health ", health_to_remove)
+		if is_player:
+			EventBus.emit_signal("playerHealth", current_health)
 		if(current_health < 0):
 			health_reached_zero()
 		if has_invincibility_cooldown:

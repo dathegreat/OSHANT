@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bgs472tq8i2ni"]
+[gd_scene load_steps=19 format=3 uid="uid://bgs472tq8i2ni"]
 
 [ext_resource type="Script" path="res://scenes/main_level.gd" id="1_hwkj6"]
 [ext_resource type="Shader" path="res://DA/TestEnvironment.gdshader" id="1_llu8q"]
@@ -8,6 +8,7 @@
 [ext_resource type="Environment" uid="uid://c5lynkhbnfosb" path="res://scenes/level_env.tres" id="5_ooi2q"]
 [ext_resource type="Script" path="res://DA/Camera3D.gd" id="6_veprd"]
 [ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="7_l3t53"]
+[ext_resource type="Script" path="res://scenes/player Health.gd" id="8_58psa"]
 [ext_resource type="PackedScene" uid="uid://d4bmlec4hc2p7" path="res://components/level_exit.tscn" id="8_phju1"]
 [ext_resource type="Resource" uid="uid://8bc6yl6m8pdo" path="res://resources/levels/levelGroups/new_group.tres" id="9_vftj0"]
 [ext_resource type="Script" path="res://scenes/Intro_to_level.gd" id="9_xf4au"]
@@ -86,6 +87,14 @@ light_color = Color(1, 0.952941, 0.905882, 1)
 light_energy = 16.0
 shadow_enabled = true
 spot_range = 50.117
+
+[node name="player Health" type="CanvasLayer" parent="RotationAnchor/PlayerCharacter"]
+script = ExtResource("8_58psa")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RotationAnchor/PlayerCharacter/player Health"]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Health: 100"
 
 [node name="Building" parent="." instance=ExtResource("7_l3t53")]
 level_group = ExtResource("9_vftj0")

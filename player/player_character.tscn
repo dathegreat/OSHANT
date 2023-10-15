@@ -53,6 +53,7 @@ mesh = SubResource("PlaneMesh_magoh")
 [node name="Health" type="Node" parent="Systems"]
 script = ExtResource("3_7y4ox")
 has_invincibility_cooldown = true
+is_player = true
 
 [node name="Pause_System" type="Node" parent="Systems"]
 process_mode = 3
