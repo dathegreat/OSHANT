@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://fmg5txlwro1h"]
+
+[ext_resource type="Script" path="res://Menus/main/MainMenu.gd" id="1_oc28t"]
+[ext_resource type="Script" path="res://Menus/menu_container.gd" id="2_58mde"]
+[ext_resource type="Texture2D" uid="uid://dabs8la6dh4q7" path="res://Art/Icons/arrow.png" id="3_y8d8l"]
+[ext_resource type="Script" path="res://Menus/game_over/game_over_button_handler.gd" id="4_3s4as"]
+
+[sub_resource type="Gradient" id="Gradient_j4kir"]
+offsets = PackedFloat32Array(0, 0.0701169, 0.988314)
+colors = PackedColorArray(0, 0, 0, 0.745098, 0.0313726, 0.0313726, 0.0313726, 0.745098, 0.235294, 0.235294, 0.235294, 0.705882)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d7xap"]
+gradient = SubResource("Gradient_j4kir")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8jwvn"]
+font_size = 130
+
+[node name="game_over" type="CanvasLayer" node_paths=PackedStringArray("menu", "game_title")]
+process_mode = 3
+script = ExtResource("1_oc28t")
+menu = NodePath("Menu")
+transition = true
+has_title_transition = true
+init_pos = Vector2(423.5, 600)
+final_pos = Vector2(423.5, 125)
+time = 2.0
+title_time = 1.0
+game_title = NodePath("GameOverLabel")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_d7xap")
+
+[node name="GameOverLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -192.0
+offset_right = 35.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_8jwvn")
+horizontal_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="." node_paths=PackedStringArray("pointer")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.5
+offset_top = -199.0
+offset_right = 152.5
+offset_bottom = 199.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("2_58mde")
+pointer = NodePath("../Pointer")
+
+[node name="Resume" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+
+[node name="Exit To Menu" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Exit To Menu"
+
+[node name="Pointer" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(9.5, 9.5)
+scale = Vector2(2, 2)
+texture = ExtResource("3_y8d8l")
+
+[node name="game_over_button_handler" type="Node" parent="."]
+script = ExtResource("4_3s4as")

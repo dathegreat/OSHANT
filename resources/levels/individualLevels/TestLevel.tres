@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=5 format=3 uid="uid://kle0r3u62qoy"]
+
+[ext_resource type="Script" path="res://scripts/level_resource.gd" id="1_4k5h3"]
+[ext_resource type="Texture2D" uid="uid://dh553bkum3wko" path="res://DA/TestBuildingMap.png" id="1_y3qvj"]
+[ext_resource type="Texture2D" uid="uid://ch11pqlkrly2c" path="res://DA/LevelExit.png" id="2_lrhcc"]
+[ext_resource type="Texture2D" uid="uid://djwghw2mmqepq" path="res://DA/stairsst.png" id="4_nyk2u"]
+
+[resource]
+script = ExtResource("1_4k5h3")
+level_name = "DA Level"
+background_layer = ExtResource("1_y3qvj")
+stair_layer = ExtResource("4_nyk2u")
+exit_level_layer = ExtResource("2_lrhcc")

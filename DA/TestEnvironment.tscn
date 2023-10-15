@@ -1,13 +1,35 @@
-[gd_scene load_steps=16 format=3 uid="uid://irba3p13okd3"]
+[gd_scene load_steps=18 format=3 uid="uid://irba3p13okd3"]
 
 [ext_resource type="Script" path="res://DA/TestEnvironment.gd" id="1_8rac5"]
 [ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="2_25sxt"]
-[ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://Carlos/PrototypeScene/player_character.tscn" id="3_sqd75"]
+[ext_resource type="PackedScene" uid="uid://bv6y1pneahkvr" path="res://enemy/enemy.tscn" id="2_jt64i"]
+[ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://player/player_character.tscn" id="3_sqd75"]
 [ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="4_47if1"]
 [ext_resource type="Script" path="res://DA/Camera3D.gd" id="4_aankn"]
+<<<<<<< HEAD
 [ext_resource type="Shader" path="res://DA/TestEnvironment.gdshader" id="5_dioky"]
 [ext_resource type="Texture2D" uid="uid://ywsg1ehrryo0" path="res://DA/NightSky.hdr" id="6_g1hph"]
 [ext_resource type="Texture2D" uid="uid://baq12vgmo3k6t" path="res://icon.png" id="7_da6ob"]
+=======
+[ext_resource type="PackedScene" uid="uid://d4bmlec4hc2p7" path="res://components/level_exit.tscn" id="6_gllpg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwkbp"]
+
+[sub_resource type="Sky" id="Sky_2usht"]
+sky_material = SubResource("ProceduralSkyMaterial_uwkbp")
+
+[sub_resource type="Environment" id="Environment_v2eui"]
+background_mode = 2
+sky = SubResource("Sky_2usht")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8dvmy"]
+dof_blur_amount = 0.02
+>>>>>>> dev
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
 
@@ -38,6 +60,7 @@ fog_light_energy = 0.8
 
 [node name="TestEnvironment" type="Node3D"]
 script = ExtResource("1_8rac5")
+enemy = ExtResource("2_jt64i")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.075, 0)
@@ -74,7 +97,7 @@ axis_lock_linear_x = true
 axis_lock_linear_z = true
 
 [node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 33.0996)
 environment = SubResource("Environment_mfcpt")
 current = true
 script = ExtResource("4_aankn")
@@ -97,5 +120,6 @@ shadow_enabled = true
 spot_range = 50.117
 
 [node name="Building" parent="." instance=ExtResource("4_47if1")]
+level_exit_scene = ExtResource("6_gllpg")
 
 [connection signal="property_list_changed" from="Building" to="." method="_on_building_property_list_changed"]

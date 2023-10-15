@@ -1,20 +1,50 @@
 extends Node3D
+
+@export_group("Levels")
+@export var level_group : LevelGroup
+var building_texture: Image = preload("res://DA/TestBuildingMap.png").get_image()
+var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
+var enemy_placement_texture : Image = preload("res://DA/TestStairMap.png").get_image()
+var level_exit_texture : Image = preload("res://DA/TestStairMap.png").get_image()
+
+var current_level := 0
+
+@export_category("object to Instantiate")
+@export var enemy_scene : PackedScene
+@export var level_exit_scene : PackedScene
+
+
 @export_category("Building Parameters")
 @export var steps: int = 200
-var rotation_step_size: float = (2 * PI) / steps
-@export var cylinder_radius: float = 50
 @export var height: float = 50
+@export var cylinder_radius: float = 50
 @export var brick_height: float = 0.5
-var brick_width: float = (2 * PI * cylinder_radius) / steps
 @export var brick_depth: float = 1
+
+var rotation_step_size: float = (2 * PI) / steps
+var brick_width: float = (2 * PI * cylinder_radius) / steps
 var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
+<<<<<<< HEAD
 var building_texture: Image = preload("res://DA/TestBuildingMap.png").get_image()
 var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
 var brick_shader = preload("res://DA/Brick.gdshader")
 var stair_shader = preload("res://DA/Stair.gdshader")
+=======
+
+
+>>>>>>> dev
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	generate_building(current_level)
+	pass
+
+func generate_building(level_to_build : int):
+	var build_level = level_group.levels[level_to_build]
+	print("now building ", build_level.level_name)
+	building_texture = build_level.background_layer.get_image()
+	stair_texture = build_level.stair_layer.get_image()
+	level_exit_texture = build_level.exit_level_layer.get_image()
 	for step in range(0, steps):
 		for y in range(0, height):
 			#determine if the given brick should be created or left empty
@@ -27,17 +57,21 @@ func _ready():
 			var theta: float = rotation_step_size * step
 			#for every black pixel in the building map, draw a brick
 			if building_texture.get_pixel(building_texture.get_width() - step - 1, building_texture.get_height() - y - 1).v < 0.01:
-				var position: Vector3 = Vector3(
+				var converted_position := Vector3(
 					cylinder_radius * cos(theta), 
 					y * brick_height,  
 					cylinder_radius * sin(theta)
 				)
 				var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
+<<<<<<< HEAD
 				var brick: RigidBody3D = create_brick(position, center, brick_shader)
+=======
+				var brick: RigidBody3D = create_brick(converted_position, center, color)
+>>>>>>> dev
 				add_child(brick)
 			#for every black pixel in the stair map, draw a brick
 			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
-				var stair_position: Vector3 = Vector3(
+				var stair_position := Vector3(
 					(cylinder_radius + brick_depth) * cos(theta), 
 					y * brick_height,  
 					(cylinder_radius + brick_depth) * sin(theta)
@@ -45,6 +79,13 @@ func _ready():
 				var stair_color: Color = Color(0.9, 0.9, 0.9)
 				var stair: RigidBody3D = create_brick(stair_position, center, stair_shader)
 				add_child(stair)
+			if level_exit_texture.get_pixel(level_exit_texture.get_width() - step - 1, level_exit_texture.get_height() - y - 1).v < 0.01:
+				var level_exit_pos:= Vector3(
+					(cylinder_radius + brick_depth) * cos(theta), 
+					y * brick_height,  
+					(cylinder_radius + brick_depth) * sin(theta)
+				)
+				create_level_exit(level_exit_pos)
 	#draw staircase on outside of building
 	#for step in range(0, steps):
 		##staricase is generated in a spiral, with the height of each step
@@ -65,7 +106,11 @@ func _ready():
 		#var brick: RigidBody3D = create_brick(position, center, color)
 		#add_child(brick)
 
+<<<<<<< HEAD
 func create_brick(position: Vector3, center: Vector3, shader: Shader) -> RigidBody3D:
+=======
+func create_brick(position_to_create: Vector3, center: Vector3, color: Color) -> RigidBody3D:
+>>>>>>> dev
 	var brick: MeshInstance3D = MeshInstance3D.new()
 	brick.mesh = BoxMesh.new()
 	brick.mesh.size = brick_size
@@ -78,12 +123,20 @@ func create_brick(position: Vector3, center: Vector3, shader: Shader) -> RigidBo
 	var rigid_body = RigidBody3D.new()
 	#move each brick to its given position on the cylinder and then
 	#point its face toward the center of the cylinder
-	rigid_body.look_at_from_position(position, center)
+	rigid_body.look_at_from_position(position_to_create, center)
 	rigid_body.freeze = true
 	rigid_body.add_child(collision_shape)
 	rigid_body.add_child(brick)
 	
 	return rigid_body
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+
+func create_enemy():
 	pass
+
+func create_level_exit(instantiate_position : Vector3):
+	await get_tree().create_timer(1).timeout
+	print("instantiating at ", instantiate_position)
+	var level_exit = level_exit_scene.instantiate()
+	self.add_sibling(level_exit)
+	level_exit.position = instantiate_position
+	print(level_exit, level_exit.position)

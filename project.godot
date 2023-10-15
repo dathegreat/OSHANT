@@ -11,17 +11,17 @@ config_version=5
 [application]
 
 config/name="OSHANT"
-run/main_scene="res://Carlos/Menus/MainMenu.tscn"
+run/main_scene="res://Menus/main/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 
 [autoload]
 
-Dialogue="*res://scenes/autoloads/dialogue.tscn"
-Options="*res://scenes/autoloads/options.tscn"
-SaveLoad="*res://scenes/autoloads/save_load.tscn"
-SceneTransition="*res://Carlos/Menus/SceneTransition.tscn"
-EventBus="*res://Carlos/components/event_bus.gd"
+Dialogue="*res://scenes/presets/autoloads/dialogue.tscn"
+Options="*res://scenes/presets/autoloads/options.tscn"
+SaveLoad="*res://scenes/presets/autoloads/save_load.tscn"
+SceneTransition="*res://Menus/SceneTransition.tscn"
+EventBus="*res://scripts/global/event_bus.gd"
 
 [display]
 
@@ -75,6 +75,21 @@ interact={
 jump={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+sprint={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+3d_physics/layer_1="Blockers"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemy"
+3d_physics/layer_4="Interactable"
+3d_physics/layer_5="Attack"
+3d_physics/layer_6="Damage"
+3d_physics/layer_7="Event"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=4 format=3 uid="uid://yu7v5q3fpkq8"]
+
+[ext_resource type="Script" path="res://scripts/level_resource.gd" id="1_1de60"]
+[ext_resource type="Texture2D" uid="uid://1rto2wpnhrxx" path="res://resources/levels/images/background.png" id="1_tuxxh"]
+[ext_resource type="Texture2D" uid="uid://dcgrjykedbcr7" path="res://resources/levels/images/stairs.png" id="3_jd16k"]
+
+[resource]
+script = ExtResource("1_1de60")
+level_name = "Carlos Level"
+background_layer = ExtResource("1_tuxxh")
+stair_layer = ExtResource("3_jd16k")

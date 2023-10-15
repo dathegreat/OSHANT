@@ -1,0 +1,87 @@
+[gd_scene load_steps=16 format=3 uid="uid://d3atlvnr22cau"]
+
+[ext_resource type="Script" path="res://DA/TestEnvironment.gd" id="1_8nrmg"]
+[ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="2_ri0un"]
+[ext_resource type="PackedScene" uid="uid://cob13pr8mat6h" path="res://player/player_character.tscn" id="3_vpfoy"]
+[ext_resource type="Script" path="res://DA/Camera3D.gd" id="4_u5g1c"]
+[ext_resource type="PackedScene" uid="uid://daclwoq5u7aop" path="res://DA/Building.tscn" id="5_5705v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwkbp"]
+
+[sub_resource type="Sky" id="Sky_2usht"]
+sky_material = SubResource("ProceduralSkyMaterial_uwkbp")
+
+[sub_resource type="Environment" id="Environment_v2eui"]
+background_mode = 2
+sky = SubResource("Sky_2usht")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8dvmy"]
+dof_blur_amount = 0.02
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvrj5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2payb"]
+size = Vector3(244.044, 0, 322.817)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj7jq"]
+albedo_color = Color(0, 0.313726, 0.129412, 1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qkxud"]
+
+[sub_resource type="Sky" id="Sky_17w6c"]
+sky_material = SubResource("PhysicalSkyMaterial_qkxud")
+
+[sub_resource type="Environment" id="Environment_mfcpt"]
+background_mode = 2
+sky = SubResource("Sky_17w6c")
+sky_custom_fov = 98.5
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+
+[node name="TestEnvironment" type="Node3D"]
+script = ExtResource("1_8nrmg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v2eui")
+camera_attributes = SubResource("CameraAttributesPractical_8dvmy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 34.2085, 33.4116)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_lvrj5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1366, 0, -103.538)
+shape = SubResource("BoxShape3D_2payb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1718, -1, -73.7149)
+size = Vector3(205.761, 1, 254.084)
+material = SubResource("StandardMaterial3D_cj7jq")
+
+[node name="RotationAnchor" type="Node3D" parent="."]
+script = ExtResource("2_ri0un")
+
+[node name="PlayerCharacter" parent="RotationAnchor" node_paths=PackedStringArray("rotation_node") instance=ExtResource("3_vpfoy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 40)
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+rotation_node = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
+environment = SubResource("Environment_mfcpt")
+current = true
+script = ExtResource("4_u5g1c")
+
+[node name="Building" parent="." instance=ExtResource("5_5705v")]
+
+[connection signal="property_list_changed" from="Building" to="." method="_on_building_property_list_changed"]
