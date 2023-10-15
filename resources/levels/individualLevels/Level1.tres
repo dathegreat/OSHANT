@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelResource" load_steps=7 format=3 uid="uid://dmcxgwm3gc727"]
+[gd_resource type="Resource" script_class="LevelResource" load_steps=7 format=3 uid="uid://bu6pdwelh06u1"]
 
 [ext_resource type="Texture2D" uid="uid://clp8u0px6nyqt" path="res://resources/levels/images/Level_1_Brick.jpg" id="1_g0fei"]
 [ext_resource type="Texture2D" uid="uid://c8jwa3cu677ok" path="res://resources/levels/images/Level_1_Enemy.jpg" id="2_i77cr"]
