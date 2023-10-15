@@ -10,5 +10,6 @@ func button_interact(item : int):
 		0:
 			SceneTransition.change_scene(level_to_load_path)
 			MusicManager.play_main()
+			MusicManager.normal_effect()
 		1:
 			get_tree().quit()
