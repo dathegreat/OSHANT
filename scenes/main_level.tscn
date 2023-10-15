@@ -131,7 +131,6 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="End Game Canvas" type="CanvasLayer" parent="Intro_to_level/Cam_rotator/anim_cam"]
-visible = false
 follow_viewport_enabled = true
 
 [node name="EndGameLabel" type="RichTextLabel" parent="Intro_to_level/Cam_rotator/anim_cam/End Game Canvas"]

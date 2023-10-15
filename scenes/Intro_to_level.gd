@@ -4,11 +4,10 @@ extends Node
 @export var game_cam : Camera3D
 @export var player : CharacterBody3D
 @export var player_rotater : Node3D
-@onready var rich_text_label: RichTextLabel = $anim_cam/CanvasLayer/RichTextLabel
+@onready var rich_text_label: RichTextLabel = $Cam_rotator/anim_cam/CanvasLayer/RichTextLabel
 @onready var cam_rotator: Node3D = $Cam_rotator
 @onready var end_game_canvas: CanvasLayer = $"Cam_rotator/anim_cam/End Game Canvas"
 @onready var end_game_label: RichTextLabel = $"Cam_rotator/anim_cam/End Game Canvas/EndGameLabel"
-@onready var button: Button = $"Cam_rotator/anim_cam/End Game Canvas/Button"
 
 var ending_rotation = false
 
@@ -16,6 +15,7 @@ var orbit_cam_position : Vector3
 var orbit_cam_rotation
 
 func _ready() -> void:
+	end_game_canvas.hide()
 	EventBus.end_level.connect(exit_level)
 	EventBus.score.connect(show_score)
 	orbit_cam_position = anim_cam.position
@@ -72,13 +72,10 @@ func show_score(won:bool, bricks:int):
 	var tween = get_tree().create_tween()
 	tween.tween_property(end_game_label, "visible_ratio", 1, 3)
 	await tween.finished
-	button.show()
 	
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	finished_intro()
 
 
-func _on_button_pressed() -> void:
-	MusicManager.play_intro()
-	SceneTransition.change_scene("res://Menus/main/MainMenu.tscn")
+
