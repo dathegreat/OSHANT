@@ -17,11 +17,6 @@ func _ready() -> void:
 	state.enter()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if Input.is_action_pressed("interact"):
-		print("chase after player!!!")
-		transition_to("Chase")
-	pass
 
 # This function calls the current state's exit() function, then changes the active state,
 # and calls its enter function.

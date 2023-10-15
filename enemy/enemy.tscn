@@ -59,3 +59,5 @@ script = ExtResource("8_n186x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/DamageArea"]
 shape = SubResource("BoxShape3D_8ypao")
+
+[node name="Node" type="Node" parent="CharacterBody3D/DamageArea"]

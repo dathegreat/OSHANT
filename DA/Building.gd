@@ -137,8 +137,6 @@ func create_brick(position_to_create: Vector3, center: Vector3, shader: Shader) 
 	
 	return rigid_body
 
-func create_enemy():
-	pass
 
 func create_level_exit(instantiate_position : Vector3):
 	await get_tree().create_timer(1).timeout
