@@ -8,7 +8,7 @@ var enemy_placement_texture : Image = preload("res://DA/TestStairMap.png").get_i
 var player_placement_texture : Image = preload("res://DA/TestStairMap.png").get_image()
 var level_exit_texture : Image = preload("res://DA/TestStairMap.png").get_image()
 
-var current_level := 2
+var current_level := 0
 
 @export_category("object to Instantiate")
 @export var enemy_scene : PackedScene
