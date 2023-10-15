@@ -11,17 +11,17 @@ config_version=5
 [application]
 
 config/name="OSHANT"
-run/main_scene="res://Carlos/Menus/MainMenu.tscn"
+run/main_scene="res://Menus/main/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.png"
 
 [autoload]
 
-Dialogue="*res://scenes/autoloads/dialogue.tscn"
-Options="*res://scenes/autoloads/options.tscn"
-SaveLoad="*res://scenes/autoloads/save_load.tscn"
-SceneTransition="*res://Carlos/Menus/SceneTransition.tscn"
-EventBus="*res://Carlos/components/event_bus.gd"
+Dialogue="*res://scenes/presets/autoloads/dialogue.tscn"
+Options="*res://scenes/presets/autoloads/options.tscn"
+SaveLoad="*res://scenes/presets/autoloads/save_load.tscn"
+SceneTransition="*res://Menus/SceneTransition.tscn"
+EventBus="*res://scripts/global/event_bus.gd"
 
 [display]
 

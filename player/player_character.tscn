@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://cob13pr8mat6h"]
+
+[ext_resource type="Script" path="res://player/PlayerPlatformer3d.gd" id="1_ciun2"]
+[ext_resource type="Texture2D" uid="uid://bdu8j442phoep" path="res://icon.svg" id="2_6i4tp"]
+[ext_resource type="Script" path="res://player/Health.gd" id="3_7y4ox"]
+[ext_resource type="Script" path="res://scripts/global/PauseSystem.gd" id="4_dsk0q"]
+[ext_resource type="PackedScene" uid="uid://dnqienosbapdp" path="res://Menus/pause/pause_menu.tscn" id="5_yp58t"]
+[ext_resource type="Script" path="res://Menus/game_over/GameOver.gd" id="6_8b1in"]
+[ext_resource type="PackedScene" uid="uid://fmg5txlwro1h" path="res://Menus/game_over/game_over.tscn" id="7_sossf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_svrbk"]
+size = Vector3(2.015, 2.08, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3r1pf"]
+size = Vector3(2.09, 2.325, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qg5ys"]
+albedo_texture = ExtResource("2_6i4tp")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_magoh"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("StandardMaterial3D_qg5ys")
+
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("interaction_area")]
+script = ExtResource("1_ciun2")
+interaction_area = NodePath("Interactor3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_svrbk")
+
+[node name="Interactor3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19894, 0, 0)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactor3D"]
+shape = SubResource("BoxShape3D_3r1pf")
+
+[node name="Graphic" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 0, 0)
+mesh = SubResource("PlaneMesh_magoh")
+
+[node name="Graphic" type="MeshInstance3D" parent="Graphic"]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 0, 0, 0)
+mesh = SubResource("PlaneMesh_magoh")
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="Health" type="Node" parent="Systems"]
+script = ExtResource("3_7y4ox")
+
+[node name="Pause_System" type="Node" parent="Systems"]
+process_mode = 3
+script = ExtResource("4_dsk0q")
+pause_menu_ui = ExtResource("5_yp58t")
+
+[node name="GameOver" type="Node" parent="Systems"]
+script = ExtResource("6_8b1in")
+game_over_ui = ExtResource("7_sossf")
