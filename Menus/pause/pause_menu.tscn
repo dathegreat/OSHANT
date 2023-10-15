@@ -43,21 +43,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Resume"
 
-[node name="Audio" type="Button" parent="Menu"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Audio"
-
-[node name="Video" type="Button" parent="Menu"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Video"
-
-[node name="Credits" type="Button" parent="Menu"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Credits"
-
 [node name="Exit To Menu" type="Button" parent="Menu"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
