@@ -82,9 +82,12 @@ axis_lock_linear_x = true
 axis_lock_linear_z = true
 
 [node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
+<<<<<<< HEAD
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 environment = SubResource("Environment_ht8qx")
 current = true
+=======
+>>>>>>> e3c4bf5cc250859b983ade951f6cc0e4909402e4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 11.0175)
 environment = ExtResource("5_ooi2q")
 script = ExtResource("6_veprd")
