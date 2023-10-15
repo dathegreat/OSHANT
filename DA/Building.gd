@@ -57,8 +57,7 @@ func generate_building(level_to_build : int):
 					y * brick_height,  
 					cylinder_radius * sin(theta)
 				)
-				var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
-				var brick: RigidBody3D = create_brick(converted_position, center, color)
+				var brick: RigidBody3D = create_brick(converted_position, center, brick_shader)
 				add_child(brick)
 			#for every black pixel in the stair map, draw a brick
 			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
@@ -67,7 +66,6 @@ func generate_building(level_to_build : int):
 					y * brick_height,  
 					(cylinder_radius + brick_depth) * sin(theta)
 				)
-				var stair_color: Color = Color(0.9, 0.9, 0.9)
 				var stair: RigidBody3D = create_brick(stair_position, center, stair_shader)
 				add_child(stair)
 			if level_exit_texture.get_pixel(level_exit_texture.get_width() - step - 1, level_exit_texture.get_height() - y - 1).v < 0.01:
@@ -98,12 +96,12 @@ func generate_building(level_to_build : int):
 		#add_child(brick)
 
 
-func create_brick(position_to_create: Vector3, center: Vector3, color: Color) -> RigidBody3D:
+func create_brick(position_to_create: Vector3, center: Vector3, shader: Shader) -> RigidBody3D:
 	var brick: MeshInstance3D = MeshInstance3D.new()
 	brick.mesh = BoxMesh.new()
 	brick.mesh.size = brick_size
 	brick.mesh.material = ShaderMaterial.new()
-	#brick.mesh.material.shader = shader
+	brick.mesh.material.shader = shader
 	#brick.mesh.material.albedo_color = color
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.shape = BoxShape3D.new()
