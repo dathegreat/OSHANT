@@ -13,7 +13,8 @@ config_version=5
 config/name="OSHANT"
 run/main_scene="res://Menus/main/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.png"
+boot_splash/image="res://cog-dark.png"
+config/icon="res://iconOshant.png"
 
 [autoload]
 
