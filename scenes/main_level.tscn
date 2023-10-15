@@ -67,11 +67,10 @@ texture = ExtResource("2_8l8vm")
 [node name="RotationAnchor" type="Node3D" parent="."]
 script = ExtResource("3_r7krh")
 
-[node name="PlayerCharacter" parent="RotationAnchor" node_paths=PackedStringArray("interaction_area") instance=ExtResource("4_4aatm")]
+[node name="PlayerCharacter" parent="RotationAnchor" instance=ExtResource("4_4aatm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 51.5)
 axis_lock_linear_x = true
 axis_lock_linear_z = true
-interaction_area = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 33.0996)

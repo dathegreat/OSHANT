@@ -15,18 +15,22 @@ func _process(_delta: float) -> void:
 
 func pause():
 	if is_paused:
+		print("paused")
 		if menu_instance:
 			menu_instance.close()
-
+		MusicManager.normal_effect()
 		await menu_instance.finished_end
 		menu_instance.queue_free()
 		get_tree().paused = false
 		is_paused = false
+		
 	else:
-		print("instantiating")
+		print("not pause")
+		MusicManager.fade_effect()
 		menu_instance = pause_menu_ui.instantiate()
 		menu_instance.finished_end.connect(remove_instance)
 		get_tree().root.add_child(menu_instance)
+		
 		#menu_instance.
 		get_tree().paused = true
 		is_paused = true

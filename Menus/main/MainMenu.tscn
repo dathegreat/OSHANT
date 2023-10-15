@@ -6,12 +6,12 @@
 [ext_resource type="Script" path="res://Menus/main/MainMenuHandler.gd" id="5_blwv5"]
 
 [sub_resource type="Gradient" id="Gradient_a1jec"]
-colors = PackedColorArray(0.0745516, 0.784689, 0.739849, 1, 0.043493, 0.359374, 0.445593, 1)
+colors = PackedColorArray(0.000322954, 0.019416, 0.017031, 1, 0.00384054, 0.0937207, 0.124623, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yphj8"]
 gradient = SubResource("Gradient_a1jec")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0.205128, 1)
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0.991453, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_f853s"]
 
@@ -47,7 +47,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 186
-text = "TITLE"
+text = "OSHANT"
 label_settings = SubResource("LabelSettings_f853s")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -59,22 +59,16 @@ alignment = 1
 script = ExtResource("1_6lk1r")
 pointer = NodePath("../../Pointer")
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/Menu"]
+[node name="Start" type="Button" parent="VBoxContainer/Menu"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "Play Button
+text = "Start
 "
 
-[node name="Settings" type="Button" parent="VBoxContainer/Menu"]
+[node name="Quit" type="Button" parent="VBoxContainer/Menu"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "Settings
-"
-
-[node name="About" type="Button" parent="VBoxContainer/Menu"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 45
-text = "About
+text = "Exit
 "
 
 [node name="Pointer" type="Sprite2D" parent="."]
@@ -86,4 +80,4 @@ texture = ExtResource("3_dpa6d")
 [node name="MenuButtonHandler" type="Node" parent="." node_paths=PackedStringArray("menu_handler")]
 script = ExtResource("5_blwv5")
 menu_handler = NodePath("..")
-level_to_load_path = "res://Carlos/PrototypeScene/MovementPrototype.tscn"
+level_to_load_path = "res://scenes/main_level.tscn"

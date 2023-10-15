@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://Menus/SceneTransition.gd" id="1_46asp"]
 
 [sub_resource type="Gradient" id="Gradient_f87b8"]
-colors = PackedColorArray(0.303071, 0.491488, 0.919922, 1, 0.317647, 1, 1, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.198851, 0.199293, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hvi1n"]
 gradient = SubResource("Gradient_f87b8")
-fill_to = Vector2(1, 1)
+fill_from = Vector2(0.465812, 1)
+fill_to = Vector2(0.508547, 0)
 
 [sub_resource type="Animation" id="Animation_1dvsr"]
 resource_name = "in"

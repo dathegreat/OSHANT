@@ -9,5 +9,9 @@ func button_pressed(item):
 		0:
 			pause_menu_handler.close()
 		1:
-			print("1")
+			get_tree().paused = false
+			MusicManager.play_intro()
+			SceneTransition.change_scene("res://Menus/main/MainMenu.tscn")
+		2:
+			get_tree().quit()
 

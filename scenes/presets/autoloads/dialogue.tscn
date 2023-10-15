@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://co67r3c0q1llm"]
 
 [ext_resource type="Texture2D" uid="uid://bdu8j442phoep" path="res://icon.svg" id="1_nbc0r"]
-[ext_resource type="Script" path="res://scenes/autoloads/dialogue.gd" id="1_pav7p"]
+[ext_resource type="Script" path="res://scenes/presets/autoloads/dialogue.gd" id="1_pav7p"]
 
 [node name="Dialogue" type="Window"]
 process_mode = 3
 position = Vector2i(0, 512)
 size = Vector2i(1152, 136)
+visible = false
 transient = true
 unresizable = true
 borderless = true

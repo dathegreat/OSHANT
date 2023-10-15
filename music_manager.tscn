@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://byjx5gyipgc6i"]
+
+[ext_resource type="Script" path="res://MusicManager.gd" id="1_jlmg2"]
+[ext_resource type="AudioStream" uid="uid://lmc1trtqt8hf" path="res://Art/Music/Intro.wav" id="2_864x8"]
+[ext_resource type="AudioStream" uid="uid://hnaamuj6kdpd" path="res://Art/Music/OSHANT.mp3" id="3_mue44"]
+
+[node name="MusicManager" type="Node"]
+process_mode = 3
+process_priority = 1
+script = ExtResource("1_jlmg2")
+music_to_play = Array[AudioStream]([ExtResource("2_864x8"), ExtResource("3_mue44")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+process_priority = 1
+stream = ExtResource("2_864x8")
+autoplay = true
