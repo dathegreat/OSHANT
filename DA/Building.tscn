@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-[gd_scene load_steps=4 format=3 uid="uid://daclwoq5u7aop"]
-
-[ext_resource type="Script" path="res://DA/Building.gd" id="1_yty5g"]
-[ext_resource type="Material" uid="uid://np3ypsht83p2" path="res://DA/BrickMaterial.tres" id="2_y0on5"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_w6f51"]
-material = ExtResource("2_y0on5")
-
-[node name="Building" type="Node3D"]
-script = ExtResource("1_yty5g")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_w6f51")
-=======
 [gd_scene load_steps=3 format=3 uid="uid://daclwoq5u7aop"]
 
 [ext_resource type="Script" path="res://DA/Building.gd" id="1_yty5g"]
@@ -21,4 +6,3 @@ mesh = SubResource("BoxMesh_w6f51")
 [node name="Building" type="Node3D"]
 script = ExtResource("1_yty5g")
 level_group = ExtResource("2_c7lba")
->>>>>>> dev

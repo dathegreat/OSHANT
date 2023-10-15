@@ -24,15 +24,10 @@ var current_level := 0
 var rotation_step_size: float = (2 * PI) / steps
 var brick_width: float = (2 * PI * cylinder_radius) / steps
 var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
-<<<<<<< HEAD
-var building_texture: Image = preload("res://DA/TestBuildingMap.png").get_image()
-var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
+
 var brick_shader = preload("res://DA/Brick.gdshader")
 var stair_shader = preload("res://DA/Stair.gdshader")
-=======
 
-
->>>>>>> dev
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,11 +58,7 @@ func generate_building(level_to_build : int):
 					cylinder_radius * sin(theta)
 				)
 				var color = Color(lerpf(0, 1, float(step) / steps), y / height, 0)
-<<<<<<< HEAD
-				var brick: RigidBody3D = create_brick(position, center, brick_shader)
-=======
 				var brick: RigidBody3D = create_brick(converted_position, center, color)
->>>>>>> dev
 				add_child(brick)
 			#for every black pixel in the stair map, draw a brick
 			if stair_texture.get_pixel(stair_texture.get_width() - step - 1, stair_texture.get_height() - y - 1).v < 0.01:
@@ -106,16 +97,13 @@ func generate_building(level_to_build : int):
 		#var brick: RigidBody3D = create_brick(position, center, color)
 		#add_child(brick)
 
-<<<<<<< HEAD
-func create_brick(position: Vector3, center: Vector3, shader: Shader) -> RigidBody3D:
-=======
+
 func create_brick(position_to_create: Vector3, center: Vector3, color: Color) -> RigidBody3D:
->>>>>>> dev
 	var brick: MeshInstance3D = MeshInstance3D.new()
 	brick.mesh = BoxMesh.new()
 	brick.mesh.size = brick_size
 	brick.mesh.material = ShaderMaterial.new()
-	brick.mesh.material.shader = shader
+	#brick.mesh.material.shader = shader
 	#brick.mesh.material.albedo_color = color
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.shape = BoxShape3D.new()

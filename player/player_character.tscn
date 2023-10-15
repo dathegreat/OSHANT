@@ -1,12 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://cob13pr8mat6h"]
 
-<<<<<<< HEAD:Carlos/PrototypeScene/player_character.tscn
 [ext_resource type="Script" path="res://Carlos/PrototypeScene/PlayerPlatformer3d.gd" id="1_ciun2"]
 [ext_resource type="Texture2D" uid="uid://cxhm1rwmpx1gm" path="res://DA/Felonius.png" id="2_y25xf"]
 [ext_resource type="Script" path="res://Carlos/components/Health.gd" id="3_7y4ox"]
 [ext_resource type="Script" path="res://Carlos/components/PauseSystem.gd" id="4_dsk0q"]
 [ext_resource type="PackedScene" uid="uid://dnqienosbapdp" path="res://Carlos/Menus/pause_menu.tscn" id="5_yp58t"]
-=======
 [ext_resource type="Script" path="res://player/PlayerPlatformer3d.gd" id="1_ciun2"]
 [ext_resource type="Texture2D" uid="uid://bdu8j442phoep" path="res://icon.svg" id="2_6i4tp"]
 [ext_resource type="Script" path="res://player/Health.gd" id="3_7y4ox"]
@@ -14,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://dnqienosbapdp" path="res://Menus/pause/pause_menu.tscn" id="5_yp58t"]
 [ext_resource type="Script" path="res://Menus/game_over/GameOver.gd" id="6_8b1in"]
 [ext_resource type="PackedScene" uid="uid://fmg5txlwro1h" path="res://Menus/game_over/game_over.tscn" id="7_sossf"]
->>>>>>> dev:player/player_character.tscn
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_svrbk"]
 size = Vector3(2, 3, 1)
