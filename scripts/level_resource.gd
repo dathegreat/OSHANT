@@ -8,3 +8,4 @@ class_name LevelResource
 @export var background_layer : Texture
 @export var stair_layer : Texture
 @export var exit_level_layer : Texture
+@export var enemy_layer : Texture
