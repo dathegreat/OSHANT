@@ -27,7 +27,6 @@ func remove_health(health_to_remove : int):
 			can_be_damaged = false
 			await get_tree().create_timer(1).timeout
 			can_be_damaged = true
-	print("can't be damaged")
 
 func set_max_health(new_max_health : int):
 	max_health = new_max_health

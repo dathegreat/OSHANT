@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cob13pr8mat6h"]
+[gd_scene load_steps=29 format=3 uid="uid://cob13pr8mat6h"]
 
 [ext_resource type="Script" path="res://player/PlayerPlatformer3d.gd" id="1_ciun2"]
 [ext_resource type="Script" path="res://player/player-collision.gd" id="2_mugoj"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bn5md0pb4ue62" path="res://Art/hunk/run/hunk_run1.png" id="21_7xqc0"]
 [ext_resource type="Texture2D" uid="uid://cx1mkltf56mog" path="res://Art/hunk/run/hunk_run2.png" id="22_soiow"]
 [ext_resource type="Texture2D" uid="uid://b6oh3k3y2q2m3" path="res://Art/hunk/run/hunk_run3.png" id="23_pm0l8"]
+[ext_resource type="Script" path="res://player/playerHitbox.gd" id="24_em6p8"]
 [ext_resource type="Texture2D" uid="uid://n67hxhwdmwvv" path="res://Art/hunk/run/hunk_run4.png" id="24_paedn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_svrbk"]
@@ -96,7 +97,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rhlut"]
+
 [node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("interaction_area")]
+collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ciun2")
 interaction_area = NodePath("Interactor3D")
@@ -118,6 +122,7 @@ shape = SubResource("BoxShape3D_3r1pf")
 [node name="Health" type="Node" parent="Systems"]
 script = ExtResource("3_7y4ox")
 has_invincibility_cooldown = true
+is_player = true
 
 [node name="Pause_System" type="Node" parent="Systems"]
 process_mode = 3
@@ -137,5 +142,14 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_mqd5o")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="playerHitbox" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("24_em6p8")
+health_component = NodePath("../Systems/Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="playerHitbox"]
+shape = SubResource("CapsuleShape3D_rhlut")
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
