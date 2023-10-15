@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=7 format=3 uid="uid://bu6pdwelh06u1"]
+
+[ext_resource type="Texture2D" uid="uid://clp8u0px6nyqt" path="res://resources/levels/images/Level_1_Brick.jpg" id="1_g0fei"]
+[ext_resource type="Texture2D" uid="uid://c8jwa3cu677ok" path="res://resources/levels/images/Level_1_Enemy.jpg" id="2_i77cr"]
+[ext_resource type="Texture2D" uid="uid://cdbf22y0c11m2" path="res://resources/levels/images/Level_1_Exit.jpg" id="3_he4rt"]
+[ext_resource type="Script" path="res://scripts/level_resource.gd" id="4_qgjpo"]
+[ext_resource type="Texture2D" uid="uid://dhj4wjss0pq4i" path="res://resources/levels/images/Level_1_Player.jpg" id="4_qnb4q"]
+[ext_resource type="Texture2D" uid="uid://5ayyuvyssfdf" path="res://resources/levels/images/Level_1_Stairs.jpg" id="5_qxqbk"]
+
+[resource]
+script = ExtResource("4_qgjpo")
+level_name = "Level 1"
+background_layer = ExtResource("1_g0fei")
+stair_layer = ExtResource("5_qxqbk")
+exit_level_layer = ExtResource("3_he4rt")
+enemy_layer = ExtResource("2_i77cr")
+player_layer = ExtResource("4_qnb4q")

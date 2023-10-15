@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgs472tq8i2ni"]
+[gd_scene load_steps=17 format=3 uid="uid://bgs472tq8i2ni"]
 
+[ext_resource type="Script" path="res://scenes/main_level.gd" id="1_hwkj6"]
 [ext_resource type="Shader" path="res://DA/TestEnvironment.gdshader" id="1_llu8q"]
 [ext_resource type="Texture2D" uid="uid://baq12vgmo3k6t" path="res://icon.png" id="2_8l8vm"]
 [ext_resource type="Script" path="res://DA/RotationAnchor.gd" id="3_r7krh"]
@@ -37,6 +38,7 @@ fog_light_color = Color(0.223529, 0.537255, 0.654902, 1)
 fog_light_energy = 0.8
 
 [node name="MainLevel" type="Node3D"]
+script = ExtResource("1_hwkj6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.075, 0)
@@ -67,14 +69,13 @@ texture = ExtResource("2_8l8vm")
 [node name="RotationAnchor" type="Node3D" parent="."]
 script = ExtResource("3_r7krh")
 
-[node name="PlayerCharacter" parent="RotationAnchor" node_paths=PackedStringArray("interaction_area") instance=ExtResource("4_4aatm")]
+[node name="PlayerCharacter" parent="RotationAnchor" instance=ExtResource("4_4aatm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 51.5)
 axis_lock_linear_x = true
 axis_lock_linear_z = true
-interaction_area = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="RotationAnchor/PlayerCharacter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 33.0996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 environment = SubResource("Environment_ht8qx")
 current = true
 script = ExtResource("6_veprd")

@@ -5,9 +5,10 @@ extends Node3D
 var building_texture: Image = preload("res://DA/TestBuildingMap.png").get_image()
 var stair_texture: Image = preload("res://DA/TestStairMap.png").get_image()
 var enemy_placement_texture : Image = preload("res://DA/TestStairMap.png").get_image()
+var player_placement_texture : Image = preload("res://DA/TestStairMap.png").get_image()
 var level_exit_texture : Image = preload("res://DA/TestStairMap.png").get_image()
 
-var current_level := 0
+var current_level := 2
 
 @export_category("object to Instantiate")
 @export var enemy_scene : PackedScene
@@ -28,6 +29,8 @@ var brick_size: Vector3 = Vector3(brick_width, brick_height, brick_depth)
 var brick_shader = preload("res://DA/Brick.gdshader")
 var stair_shader = preload("res://DA/Stair.gdshader")
 
+var player_starting_position: Vector3
+var player_starting_height: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +43,7 @@ func generate_building(level_to_build : int):
 	building_texture = build_level.background_layer.get_image()
 	stair_texture = build_level.stair_layer.get_image()
 	level_exit_texture = build_level.exit_level_layer.get_image()
+	player_placement_texture = build_level.player_layer.get_image()
 	for step in range(0, steps):
 		for y in range(0, height):
 			#determine if the given brick should be created or left empty
@@ -68,6 +72,13 @@ func generate_building(level_to_build : int):
 				)
 				var stair: RigidBody3D = create_brick(stair_position, center, stair_shader)
 				add_child(stair)
+			if player_placement_texture.get_pixel(player_placement_texture.get_width() - step - 1, player_placement_texture.get_height() - y - 1).v < 0.01:
+				player_starting_position = Vector3(
+					(cylinder_radius + 0.5 + brick_depth) * cos(theta), 
+					y * brick_height,  
+					(cylinder_radius + 0.5 + brick_depth) * sin(theta)
+				)
+				player_starting_height = y * brick_height
 			if level_exit_texture.get_pixel(level_exit_texture.get_width() - step - 1, level_exit_texture.get_height() - y - 1).v < 0.01:
 				var level_exit_pos:= Vector3(
 					(cylinder_radius + brick_depth) * cos(theta), 
@@ -121,7 +132,7 @@ func create_enemy():
 
 func create_level_exit(instantiate_position : Vector3):
 	await get_tree().create_timer(1).timeout
-	print("instantiating at ", instantiate_position)
+	print("instantiating exit at ", instantiate_position)
 	var level_exit = level_exit_scene.instantiate()
 	self.add_sibling(level_exit)
 	level_exit.position = instantiate_position
