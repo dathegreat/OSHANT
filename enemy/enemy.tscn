@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv6y1pneahkvr"]
+[gd_scene load_steps=12 format=3 uid="uid://bv6y1pneahkvr"]
 
 [ext_resource type="Script" path="res://scripts/state_machines/EnemyStateMachine.gd" id="1_rnpsk"]
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_uhge2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/state_machines/ChaseAfterPlayer.gd" id="4_c0ve8"]
 [ext_resource type="Script" path="res://scripts/state_machines/LostPlayer.gd" id="5_jpl4e"]
 [ext_resource type="Script" path="res://enemy/EnemyCharacyerBody.gd" id="7_0trb4"]
+[ext_resource type="Script" path="res://enemy/DamageArea.gd" id="8_n186x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f575e"]
 
@@ -52,6 +53,9 @@ mesh = SubResource("CapsuleMesh_8yv2t")
 skeleton = NodePath("")
 
 [node name="DamageArea" type="Area3D" parent="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("8_n186x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/DamageArea"]
 shape = SubResource("BoxShape3D_8ypao")

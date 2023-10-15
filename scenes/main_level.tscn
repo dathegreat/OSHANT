@@ -93,8 +93,8 @@ spot_range = 50.117
 script = ExtResource("8_58psa")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="RotationAnchor/PlayerCharacter/player Health"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 396.0
+offset_bottom = 58.0
 text = "Health: 100"
 
 [node name="Building" parent="." instance=ExtResource("7_l3t53")]
