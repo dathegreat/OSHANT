@@ -101,11 +101,7 @@ text = "Health: 100"
 level_group = ExtResource("9_vftj0")
 level_exit_scene = ExtResource("8_phju1")
 
-<<<<<<< Updated upstream
-[node name="Intro_to_level" type="Node3D" parent="." node_paths=PackedStringArray("anim_cam", "game_cam", "player", "player_rotater")]
-=======
 [node name="Intro_to_level" type="Node3D" parent="." node_paths=PackedStringArray("anim_cam", "game_cam", "player")]
->>>>>>> Stashed changes
 script = ExtResource("9_xf4au")
 anim_cam = NodePath("Cam_rotator/anim_cam")
 game_cam = NodePath("../RotationAnchor/PlayerCharacter/Camera3D")

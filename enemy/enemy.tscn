@@ -13,6 +13,9 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8yv2t"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ypao"]
+size = Vector3(1.5, 1.5, 1.5)
+
 [node name="EnemyAi" type="Node3D" node_paths=PackedStringArray("enemy_mesh")]
 script = ExtResource("1_uhge2")
 enemy_mesh = NodePath("CharacterBody3D")

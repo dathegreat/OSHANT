@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/level_group_resource.gd" id="1_7tw2i"]
 [ext_resource type="Resource" uid="uid://kle0r3u62qoy" path="res://resources/levels/individualLevels/TestLevel.tres" id="1_l1yx1"]
 [ext_resource type="Resource" uid="uid://yu7v5q3fpkq8" path="res://resources/levels/individualLevels/carlosLevel.tres" id="2_ocg2e"]
-[ext_resource type="Resource" path="res://resources/levels/individualLevels/ColorLevel.tres" id="3_lfdtq"]
+[ext_resource type="Resource" uid="uid://1c3fp623hyte" path="res://resources/levels/individualLevels/ColorLevel.tres" id="3_lfdtq"]
 
 [resource]
 script = ExtResource("1_7tw2i")
