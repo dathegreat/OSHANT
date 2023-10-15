@@ -7,6 +7,7 @@ func interact():
 	match interaction_type:
 		0:
 			print("going to next level")
+			EventBus.emit_signal("end_level")
 		1:
 			print("dialogue")
 		2:

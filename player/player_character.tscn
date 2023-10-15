@@ -59,3 +59,7 @@ pause_menu_ui = ExtResource("5_yp58t")
 [node name="GameOver" type="Node" parent="Systems"]
 script = ExtResource("6_8b1in")
 game_over_ui = ExtResource("7_sossf")
+
+[node name="CoyoteTimer" type="Timer" parent="Systems"]
+wait_time = 0.15
+one_shot = true

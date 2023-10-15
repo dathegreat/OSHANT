@@ -1,0 +1,18 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://c5lynkhbnfosb"]
+
+[ext_resource type="Texture2D" uid="uid://ywsg1ehrryo0" path="res://scenes/NightSky.hdr" id="1_j0tql"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wcy4l"]
+panorama = ExtResource("1_j0tql")
+
+[sub_resource type="Sky" id="Sky_255mx"]
+sky_material = SubResource("PanoramaSkyMaterial_wcy4l")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_255mx")
+glow_bloom = 0.1
+fog_enabled = true
+fog_light_color = Color(0.223529, 0.537255, 0.654902, 1)
+fog_light_energy = 0.8
